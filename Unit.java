@@ -3,6 +3,8 @@ public class Unit{
     private int ataque;
     private int velocidad;
     private int pp;
+    private int fila;
+    private int columna;
     private String habilidad;
     
     public Unit(int vida, int ataque, int velocidad, int pp, String habilidad) {
@@ -51,5 +53,19 @@ public class Unit{
 
     public void setHabilidad(String habilidad) {
         this.habilidad = habilidad;
+    }
+    public int getFila() {
+        return fila;
+    }
+
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
+    public int getColumna() {
+        return columna;
+    }
+
+    public void setColumna(int columna) {
+        this.columna = columna;
     }
 }

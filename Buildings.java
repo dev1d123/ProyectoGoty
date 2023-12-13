@@ -1,4 +1,4 @@
-package images;
+
 
 public class Buildings{
     private int life;
