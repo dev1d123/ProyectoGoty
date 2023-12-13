@@ -1,4 +1,4 @@
-public class Gestion {
+public class Reino{
     private int dinero;
     private int recursos;
     private int manuten;
@@ -8,6 +8,13 @@ public class Gestion {
     private int edificios;
     //Numero de edificios que tiene el reino
 
+    public Reino() {
+        this.dinero = 800;
+        this.recursos = 800;
+        this.manuten = 20;
+        this.tamaño = 10;
+        this.edificios = 3;
+    }
     public int getDinero() {
         return dinero;
     }
