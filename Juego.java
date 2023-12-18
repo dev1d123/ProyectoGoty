@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 
 public class Juego {
     public static void main(String[] args){
@@ -16,7 +15,7 @@ public class Juego {
                     arr = battle.getCoordenadas();
                     selec = JuegoScript.seleccion(game.getReino1(), arr[0] - 1, arr[1] - 1);
                 }
-                JOptionPane.showMessageDialog(null, "Seleccionaste las coordenadas: " + arr[0] + " " + arr[1]);
+                UnitMenu menu = new UnitMenu(selec.getDatos(), selec.getOpciones());
             }else{
                 JOptionPane.showMessageDialog(null, "Turno del reino 2");
                 int arr[] = battle.getCoordenadas();
@@ -25,7 +24,8 @@ public class Juego {
                     arr = battle.getCoordenadas();
                     selec = JuegoScript.seleccion(game.getReino2(), arr[0] - 1, arr[1] - 1);
                 }
-                JOptionPane.showMessageDialog(null, "Seleccionaste las coordenadas: " + arr[0] + " " + arr[1]);
+                UnitMenu menu = new UnitMenu(selec.getDatos(), selec.getOpciones());
+
             }
             turnos++;
         }while(game.victoria());   

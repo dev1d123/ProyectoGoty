@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Reino{
     private int dinero;
     private int recursos;
@@ -7,7 +9,8 @@ public class Reino{
     por ahora siendo parcelas cuadradas*/
     private int edificios;
     //Numero de edificios que tiene el reino
-
+    private ArrayList<Unit> unidades = new ArrayList<Unit>();
+    
     public Reino() {
         this.dinero = 800;
         this.recursos = 800;
@@ -53,5 +56,8 @@ public class Reino{
 
     public void setManuten(int manuten) {
         this.manuten = manuten;
+    }
+    public ArrayList<Unit> getUnits(){
+        return unidades;
     }
 }

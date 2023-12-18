@@ -1,5 +1,6 @@
 public class Unit{
     private int vida;
+    private String nombre;
     private int ataque;
     private int velocidad;
     private int pp;
@@ -7,12 +8,15 @@ public class Unit{
     private int columna;
     private String habilidad;
     
-    public Unit(int vida, int ataque, int velocidad, int pp, String habilidad) {
+    public Unit(String nombre, int vida, int ataque, int velocidad, int pp, String habilidad, int fila, int columna) {
+        this.nombre = nombre;
         this.vida = vida;
         this.ataque = ataque;
         this.velocidad = velocidad;
         this.pp = pp;
         this.habilidad = habilidad;
+        this.fila = fila;
+        this.columna = columna;
     }
 
     public int getVida() {
@@ -67,5 +71,30 @@ public class Unit{
 
     public void setColumna(int columna) {
         this.columna = columna;
+    }
+    public String[] getOpciones(){
+        String[] opt = new String[3];
+        opt[0] = nombre;
+        opt[1] = "Mover/Atacar";
+        opt[2] = "Habilidad";
+
+        return opt;
+    }
+    //private int vida;
+    //private String nombre;
+    //private int ataque;
+    //private int velocidad;
+    //private int pp;
+    //private int fila;
+    //private int columna;
+    //private String habilidad;
+    public String[] getDatos(){
+         //Esto se puede cambiar por un arraylist, aunque prefiero que sea un arreglo normal aplicando polimorfismo
+        String[] dat = new String[4];
+        dat[0] = "Vida: " + vida;
+        dat[1] = "Ataque: " + ataque;
+        dat[2] = "Velocidad: " + velocidad;
+        dat[3] = "Puntos de magia: " + pp;
+        return dat;
     }
 }

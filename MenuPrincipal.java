@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;;
+import java.awt.event.*;
 public class MenuPrincipal extends JFrame {
     private JButton nuevaPartida;
     private JButton cargarPartida;
@@ -54,9 +54,9 @@ public class MenuPrincipal extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == nuevaPartida){
                 setVisible(false);
-                //Juego juego = new Juego();
+                //Juego.main(null);
                 //partida();
-                JOptionPane.showMessageDialog(null, "Nueva partida");
+                //JOptionPane.showMessageDialog(null, "Nueva partida");
                 System.exit(1);
             }else if(e.getSource() == cargarPartida){
                 setVisible(false);
