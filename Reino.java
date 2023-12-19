@@ -8,12 +8,26 @@ public class Reino{
     private int edificios;
     //Numero de edificios que tiene el reino
 
-    public Reino() {
-        this.dinero = 800;
-        this.recursos = 800;
-        this.manuten = 20;
-        this.tamaño = 10;
-        this.edificios = 3;
+    public Reino(int epoca) {
+        if(epoca == 1){
+            this.dinero = 800;
+            this.recursos = 1000;
+            this.manuten = 25;
+            this.tamaño = 10;
+            this.edificios = 4;
+        }else if (epoca == 2){
+            this.dinero = 1200;
+            this.recursos = 600;
+            this.manuten = 20;
+            this.tamaño = 10;
+            this.edificios = 3;
+        } else if (epoca == 3){
+            this.dinero = 900;
+            this.recursos = 500;
+            this.manuten = 10000;
+            this.tamaño = 10;
+            this.edificios = 2;
+        }
     }
     public int getDinero() {
         return dinero;
@@ -45,6 +59,14 @@ public class Reino{
 
     public void setEdificios(int edificios) {
         this.edificios = edificios;
+    }
+    
+    public void construirEdificio(){
+        edificios += 1;
+    }
+
+    public void destruirEdificio(){
+        edificios -=1 ;
     }
 
     public int getManuten() {
