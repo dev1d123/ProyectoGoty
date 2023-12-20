@@ -18,8 +18,8 @@ public class JuegoScript {
     //En esta clase se desarrolla toda la logica del videojuego
     public JuegoScript(){
         //Ejemplo
-        r1 = new Reino();
-        r2 = new Reino();
+        r1 = new Reino((int)Math.random()*3);
+        r2 = new Reino((int) (Math.random()*3));
         genReino(r1);    
         genReino(r2);                                                                                                               
     }
@@ -33,7 +33,7 @@ public class JuegoScript {
                 columna = (int)(Math.random()*60);
             }while(posiciones[fila][columna]);
             Unit u = new Unit("UNIDAD " + i,(int)(Math.random()*60), (int)(Math.random()*60), (int)(Math.random()*60), (int)(Math.random()*60), "waos", fila, columna);
-            r.getUnits().add(u);
+            r.getUnidades().add(u);
         }
     }
     public Reino getReino1(){
@@ -43,18 +43,21 @@ public class JuegoScript {
         return r2;
     }
     public boolean victoria(){
-        if(r1.getUnits().size() == 0 || r2.getUnits().size() == 0){
+        if(r1.getUnidades().size() == 0 || r2.getUnidades().size() == 0){
             return false;
         }
         return true;
     }
     public static Unit seleccion(Reino r, int x, int y){
-        for(Unit u: r.getUnits()){
+        for(Unit u: r.getUnidades()){
             if(u.getColumna() == y && u.getFila() == x){
-                System.out.println("WOW, SELECCIONASTE UN SOLDADO");
+                System.out.println("WOW, SELECCIONASTE UN SOLDADO. FELICIDADES!");
                 return u;
             }
         }
         return null;
+    }
+    public static void jugada(Unit soldadoR){
+        
     }
 }

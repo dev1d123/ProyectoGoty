@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Reino{
     private int dinero;
     private int recursos;
@@ -7,6 +9,7 @@ public class Reino{
     por ahora siendo parcelas cuadradas*/
     private int edificios;
     //Numero de edificios que tiene el reino
+    private ArrayList<Unit> unidades;
 
     public Reino(int epoca) {
         if(epoca == 1){
@@ -15,18 +18,21 @@ public class Reino{
             this.manuten = 25;
             this.tamaño = 10;
             this.edificios = 4;
+            //Tierra Magica
         }else if (epoca == 2){
             this.dinero = 1200;
             this.recursos = 600;
             this.manuten = 20;
             this.tamaño = 10;
             this.edificios = 3;
+            //Edad Contemporanea
         } else if (epoca == 3){
             this.dinero = 900;
             this.recursos = 500;
             this.manuten = 10000;
             this.tamaño = 10;
             this.edificios = 2;
+            //Futuro
         }
     }
     public int getDinero() {
@@ -75,5 +81,11 @@ public class Reino{
 
     public void setManuten(int manuten) {
         this.manuten = manuten;
+    }
+    public ArrayList<Unit> getUnidades(){
+        return unidades;
+    }
+    public void setUnidades(ArrayList<Unit> unidades) {
+        this.unidades = unidades;
     }
 }
