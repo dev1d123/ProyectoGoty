@@ -6,6 +6,7 @@ import java.util.concurrent.CountDownLatch;
 import javax.swing.*;
 
 public class Field extends JFrame{
+    private static int turno;
     private static final int ALTO = 800; //ancho de la ventana
     private static final int ANCHO = 1000; //largo de la ventana
     private static final int MED = 60; //cantidad de filas y columnas del juego
@@ -19,7 +20,8 @@ public class Field extends JFrame{
     //Revisar
 
 
-    public Field(Reino r1, Reino r2){
+    public Field(int turno, Reino r1, Reino r2){
+        this.turno = turno;
         setTitle("Goty2024"); //Titulo de la ventana
         setSize(ANCHO, ALTO); //Dimensiones del juego
         this.r1 = r1;
@@ -87,10 +89,13 @@ public class Field extends JFrame{
             opt = i;
         }
         public void actionPerformed(ActionEvent e) {
-            if(opt == 1){
+            if(opt == 1 && turno%2 == 0){
                 JOptionPane.showMessageDialog(null, "MOSTRAR DATOS DE PREPARACION DEL EJERCITO 1");
-            }else{
+                JuegoPreparacion.mostrar(opt);
+            }else if(opt == 2 && turno%2 == 1){
                 JOptionPane.showMessageDialog(null, "MOSTRAR DATOS DE PREPARACION DEL EJERCITO 2");
+                                JuegoPreparacion.mostrar(opt);
+
             }
         }
     }
