@@ -6,9 +6,15 @@ import java.util.concurrent.CountDownLatch;
 public class UnitMenu extends JFrame {
     private String[] datos;
     private String[] opciones;
+    private int opcionSeleccionada; // Nueva variable para almacenar la opción seleccionada
+    //1 -> mover
+    //2 -> habilidades
+    //3 -> cerrar
     private CountDownLatch latch = new CountDownLatch(1);
+    private Field campo;
 
-    public UnitMenu(String[] datos, String[] opciones) {
+    public UnitMenu(Field campo, String[] datos, String[] opciones) {
+        this.campo = campo;
         this.datos = datos;
         this.opciones = opciones;
         int ancho = 200;
@@ -18,9 +24,8 @@ public class UnitMenu extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                // Llamar a tu método cuando la ventana se cierra
                 latch.countDown();
-                dispose();            
+                dispose();
             }
         });
         createContents();
@@ -29,7 +34,7 @@ public class UnitMenu extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
 
-        // Esperar hasta que la ventana se cierre
+        // Esperar hasta que latchDown -> sea 0
         try {
             latch.await();
         } catch (InterruptedException ex) {
@@ -40,7 +45,7 @@ public class UnitMenu extends JFrame {
     public void createContents() {
         String nombreSoldado = opciones[0];
         setTitle(nombreSoldado);
-        
+
         // Datos
         for (String dato : datos) {
             JLabel label = new JLabel(dato);
@@ -51,18 +56,31 @@ public class UnitMenu extends JFrame {
         for (int i = 1; i < opciones.length; i++) {
             JButton button = new JButton(opciones[i]);
             add(button);
+            if (i == 1) {
+                button.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        opcionSeleccionada = 1;
+                        dispose();
+                        latch.countDown();
+                    }
+                });
+            }
         }
 
         JButton closeButton = new JButton("Cerrar");
         closeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Al hacer clic en el botón de cerrar, contar abajo el latch
+                opcionSeleccionada = 3;
                 latch.countDown();
-                // Cerrar la ventana
                 dispose();
             }
         });
         add(closeButton);
+    }
+
+    // Nuevo método para obtener la opción seleccionada
+    public int getOpcionSeleccionada() {
+        return opcionSeleccionada;
     }
 }
