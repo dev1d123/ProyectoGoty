@@ -7,34 +7,33 @@ public class Reino{
     private int tamaño;
     /*Tamaño del largo de uno de los lados del terreno asignado a cada reino, 
     por ahora siendo parcelas cuadradas*/
-    private int edificios;
-    //Numero de edificios que tiene el reino
     private ArrayList<Unit> unidades;
+    private ArrayList<Buildings> edificios;
+
 
     public Reino(int epoca) {
-        if(epoca == 1){
+        if(epoca == 0){
             this.dinero = 800;
             this.recursos = 1000;
             this.manuten = 25;
             this.tamaño = 10;
-            this.edificios = 4;
             //Tierra Magica
-        }else if (epoca == 2){
+        }else if (epoca == 1){
             this.dinero = 1200;
             this.recursos = 600;
             this.manuten = 20;
             this.tamaño = 10;
-            this.edificios = 3;
+
             //Edad Contemporanea
-        } else if (epoca == 3){
+        } else if (epoca == 2){
             this.dinero = 900;
             this.recursos = 500;
             this.manuten = 10000;
             this.tamaño = 10;
-            this.edificios = 2;
             //Futuro
         }
     }
+
     public int getDinero() {
         return dinero;
     }
@@ -59,22 +58,6 @@ public class Reino{
         this.tamaño = tamaño;
     }
 
-    public int getEdificios() {
-        return edificios;
-    }
-
-    public void setEdificios(int edificios) {
-        this.edificios = edificios;
-    }
-    
-    public void construirEdificio(){
-        edificios += 1;
-    }
-
-    public void destruirEdificio(){
-        edificios -=1 ;
-    }
-
     public int getManuten() {
         return manuten;
     }
@@ -82,10 +65,28 @@ public class Reino{
     public void setManuten(int manuten) {
         this.manuten = manuten;
     }
+
     public ArrayList<Unit> getUnidades(){
         return unidades;
     }
+
     public void setUnidades(ArrayList<Unit> unidades) {
         this.unidades = unidades;
+    }
+
+    public ArrayList<Buildings> getEdificios() {
+        return edificios;
+    }
+
+    public void setEdificios(ArrayList<Buildings> edificios) {
+        this.edificios = edificios;
+    }
+
+    public void construirEdificio(){
+        ;
+    }
+
+    public void destruirEdificio(){
+        ;
     }
 }
