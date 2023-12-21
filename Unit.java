@@ -80,16 +80,7 @@ public class Unit{
 
         return opt;
     }
-    //private int vida;
-    //private String nombre;
-    //private int ataque;
-    //private int velocidad;
-    //private int pp;
-    //private int fila;
-    //private int columna;
-    //private String habilidad;
     public String[] getDatos(){
-         //Esto se puede cambiar por un arraylist, aunque prefiero que sea un arreglo normal aplicando polimorfismo
         String[] dat = new String[4];
         dat[0] = "Vida: " + vida;
         dat[1] = "Ataque: " + ataque;
