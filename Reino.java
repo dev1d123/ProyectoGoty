@@ -9,7 +9,7 @@ public class Reino{
     por ahora siendo parcelas cuadradas*/
     private int edificios;
     //Numero de edificios que tiene el reino
-    private ArrayList<Unit> unidades;
+    private ArrayList<Unit> unidades = new ArrayList<Unit>();
 
     public Reino(int epoca) {
         if(epoca == 1){
