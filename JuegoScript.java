@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 public class JuegoScript {
     private Reino r1;
     private Reino r2;
@@ -59,5 +61,44 @@ public class JuegoScript {
     }
     public static void jugada(Unit soldadoR){
         
+    }
+    public static void mover(Reino amigo, Reino enemigo, int x, int y, int tox, int toy){
+        Unit mov = null;
+        for(Unit u: amigo.getUnidades()){
+            if(u.getFila() == x-1 && u.getColumna() == y-1){
+                mov = u;
+                break;
+            }
+        }        
+        System.out.println("Metodo para mover");
+        //Caso mover a la misma casilla
+        if(x == tox && y == toy){
+            JOptionPane.showMessageDialog(null, "Seleccione una casilla correcta!");
+        }else{
+            Unit sold = null;
+            for(Unit u: amigo.getUnidades()){
+                if(u.getFila() == tox-1 && u.getColumna() == toy-1){
+                    sold = u;
+                }
+            }
+            if(sold != null){
+                JOptionPane.showMessageDialog(null, "Seleccione una casilla correcta!");
+                return;
+            }
+
+            for(Unit u: enemigo.getUnidades()){
+                if(u.getFila() == tox-1 && u.getColumna() == toy-1){
+                    sold = u;
+                }
+            }
+            if(sold != null){
+                JOptionPane.showMessageDialog(null, "Atacando");
+            }else{
+                JOptionPane.showMessageDialog(null, "Moviendose");
+                mov.setFila(tox);
+                mov.setColumna(toy);
+            }
+
+        }
     }
 }
