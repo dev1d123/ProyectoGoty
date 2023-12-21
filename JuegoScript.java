@@ -102,34 +102,3 @@ public class JuegoScript {
         }
     }
 }
-
-//Prob. del boolean de entrar, 3/20
-    public static void event(Reino re){
-        int rand = (int)(Math.random()*6);
-        Boolean des;
-//Tiempos de abundancia (B)
-        if(rand == 0){
-//Supermena de minerales
-        }else if(rand == 1){()
-//Sequia (M)
-        }else if(rand == 2){
-            System.out.println(" - Una sequia ha azotado el reino. Nuestras tropas estan padeciendo. No Hay Nada Que Podamos Hacer... -");
-//LEPRECHAUN! (N)
-        }else if(rand == 3){
-            rand = (int)();
-            System.out.println("- Un misterioso duende ha tocado la puerta de tu reino y te esta ofreciendo riquezas invaluables ¿Sera una trampa? - ");
-//Cazarrecompensas (N) 
-        }else if(rand == 4){
-            System.out.println("- El cazarrecompesas ha tocado la puerta de tu reino. Por una buena cantidad de oro, estaria dispuesto a unirse a nuestro ejercito -");
-            des = sc.nextBoolean();
-            if(des){
-               int cash = re.getDinero() - 350;
-               re.setDinero(cash);
-               //Se añade una unidad CazRec al ejercito del Reino 
-            } else {
-                System.out.println("-El cazarrecompensas se ha marchado. Ha mencionado que buscara un mejor reino al que ofrecer sus servicios -");
-            }
-
-        }else if(rand == 5){
-//La caja misteriosa (N) -
-        }
