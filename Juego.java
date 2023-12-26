@@ -7,7 +7,9 @@ public class Juego {
         Field battle = new Field(game.getReino1(), game.getReino2());
         int turnos = 0;
         do{
+            
             if(turnos%2 == 0){
+                battle.repintar(1);
                 JOptionPane.showMessageDialog(null, "Turno del reino 1");
                 int arr[] = battle.getCoordenadas();
                 Unit selec = JuegoScript.seleccion(game.getReino1(), arr[0] - 1, arr[1] - 1);
@@ -18,11 +20,10 @@ public class Juego {
                 UnitMenu menu = new UnitMenu(battle, selec.getDatos(), selec.getOpciones());
                 if(menu.getOpcionSeleccionada() == 1){
                     int dir[] = battle.getCoordenadas();
-                    JOptionPane.showMessageDialog(null,
-                                "Coordenadas seleccionadas: " + dir[0] + ", " + dir[1]);
                     JuegoScript.mover(game.getReino1(), game.getReino2(), arr[0], arr[1], dir[0], dir[1]);
                 }
             }else{
+                battle.repintar(2);
                 JOptionPane.showMessageDialog(null, "Turno del reino 2");
                 int arr[] = battle.getCoordenadas();
                 Unit selec = JuegoScript.seleccion(game.getReino2(), arr[0] - 1, arr[1] - 1);
@@ -33,13 +34,10 @@ public class Juego {
                 UnitMenu menu = new UnitMenu(battle, selec.getDatos(), selec.getOpciones());
                 if(menu.getOpcionSeleccionada() == 1){
                     int dir[] = battle.getCoordenadas();
-                    JOptionPane.showMessageDialog(null,
-                                "Coordenadas seleccionadas: " + dir[0] + ", " + dir[1]);
                     JuegoScript.mover(game.getReino2(), game.getReino1(), arr[0], arr[1], dir[0], dir[1]);
 
                 }                
             }
-            battle.repintar();
             turnos++;
         }while(game.victoria());   
     }

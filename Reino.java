@@ -7,7 +7,7 @@ public class Reino{
     private int tamaño;
     /*Tamaño del largo de uno de los lados del terreno asignado a cada reino, 
     por ahora siendo parcelas cuadradas*/
-    private ArrayList<Unit> unidades;
+    private ArrayList<Unit> unidades = new ArrayList<Unit>();
     private ArrayList<Buildings> edificios;
 
 

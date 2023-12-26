@@ -20,20 +20,58 @@ public class Field extends JFrame{
     //Revisar
 
 
-    public Field(int turno, Reino r1, Reino r2){
-        this.turno = turno;
+    public Field(Reino r1, Reino r2){
         setTitle("Goty2024"); //Titulo de la ventana
         setSize(ANCHO, ALTO); //Dimensiones del juego
         this.r1 = r1;
         this.r2 = r2;
-        createContents();
+        setLayout(new BorderLayout());
+        createContents(1);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
 
 
 
-    public void createContents() {
+    public void createContents(int turno) {
+        JPanel infoPanel = new JPanel(new BorderLayout());
+        Font font = new Font("Arial", Font.PLAIN, 16);
+        // Etiquetas para mostrar la información
+        JLabel nameLabel = new JLabel();
+        JLabel oroLabel = new JLabel();
+        JLabel recursosLabel = new JLabel();
+        JLabel manutencionLabel = new JLabel();
+        
+        // Configurar la información según el turno
+        if (turno == 1) {
+            nameLabel.setText("REINO 1");
+            oroLabel.setText("Oro: " + r1.getDinero()+"                                                                   ");
+            recursosLabel.setText("Recursos: " + r1.getRecursos()+"               "); 
+            manutencionLabel.setText("Manutención: " + r1.getManuten());
+        } else if (turno == 2) {
+            nameLabel.setText("REINO 2");
+            oroLabel.setText("Oro: " + r2.getDinero()+"                                                                   ");
+            recursosLabel.setText("Recursos: " + r2.getRecursos()+"               ");
+            manutencionLabel.setText("Manutención: " + r2.getManuten());
+        }
+        
+        // Configurar colores de texto
+        oroLabel.setForeground(Color.RED);
+        recursosLabel.setForeground(Color.GRAY);
+        manutencionLabel.setForeground(Color.ORANGE);
+        nameLabel.setFont(font);
+        oroLabel.setFont(font);
+        recursosLabel.setFont(font);
+        manutencionLabel.setFont(font);
+        // Añadir etiquetas al panel
+        infoPanel.add(nameLabel, BorderLayout.NORTH);
+        infoPanel.add(oroLabel, BorderLayout.WEST);
+        infoPanel.add(recursosLabel, BorderLayout.CENTER);
+        infoPanel.add(manutencionLabel, BorderLayout.EAST);
+        
+        // Añadir el panel al contenedor principal (supongo que estás usando un contenedor principal)
+        add(infoPanel, BorderLayout.NORTH);
+        //add(titulo, BorderLayout.NORTH);
         //Primero imprimimos las dos fortalezas
         JPanel panelGen = new JPanel(lay);
         JButton[][] arr = new JButton[MED][MED]; 
@@ -63,14 +101,14 @@ public class Field extends JFrame{
         
         for (int i = 0; i < MED; i++) {
             for (int j = 0; j < MED; j++) {
-                for (Unit u: r1.getUnits()) {
+                for (Unit u: r1.getUnidades()) {
                     if (u.getFila() == i && u.getColumna() == j) {
                         System.out.println("El reino 1 tiene una unidad en las coordenadas " + i + " " + j);
                         arr[i][j].setBackground(Color.RED);
                         break;
                     }
                 }
-                for (Unit u: r2.getUnits()) {
+                for (Unit u: r2.getUnidades()) {
                     if (u.getFila() == i && u.getColumna() == j) {
                         System.out.println("El reino 2 tiene una unidad en las coordenadas " + i + " " + j);
                         arr[i][j].setBackground(Color.BLUE);
@@ -81,7 +119,7 @@ public class Field extends JFrame{
             }
         }
 
-        add(panelGen);
+        add(panelGen, BorderLayout.CENTER);
     }
     private class ListenerBase implements ActionListener{
         private int opt;
@@ -91,10 +129,8 @@ public class Field extends JFrame{
         public void actionPerformed(ActionEvent e) {
             if(opt == 1 && turno%2 == 0){
                 JOptionPane.showMessageDialog(null, "MOSTRAR DATOS DE PREPARACION DEL EJERCITO 1");
-                JuegoPreparacion.mostrar(opt);
             }else if(opt == 2 && turno%2 == 1){
                 JOptionPane.showMessageDialog(null, "MOSTRAR DATOS DE PREPARACION DEL EJERCITO 2");
-                                JuegoPreparacion.mostrar(opt);
 
             }
         }
@@ -135,9 +171,9 @@ public class Field extends JFrame{
         System.out.println(arr[0] + " " + arr[1]);
         return arr;
     }
-    public void repintar(){
+    public void repintar(int turno){
         getContentPane().removeAll(); 
-        createContents(); 
+        createContents(turno); 
         revalidate(); 
         repaint();    
     }
