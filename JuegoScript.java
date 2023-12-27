@@ -18,10 +18,10 @@ public class JuegoScript {
     };
 
     //En esta clase se desarrolla toda la logica del videojuego
-    public JuegoScript(){
+    public JuegoScript(char opt1, char opt2){
         //Ejemplo
-        r1 = new Reino((int)Math.random()*3);
-        r2 = new Reino((int) (Math.random()*3));
+        r1 = new Reino(opt1);
+        r2 = new Reino(opt2);
         genReino(r1);    
         genReino(r2);                                                                                                               
     }
@@ -95,8 +95,8 @@ public class JuegoScript {
                 JOptionPane.showMessageDialog(null, "Atacando");
             }else{
                 JOptionPane.showMessageDialog(null, "Moviendose");
-                mov.setFila(tox);
-                mov.setColumna(toy);
+                mov.setFila(tox-1);
+                mov.setColumna(toy-1);
             }
 
         }
