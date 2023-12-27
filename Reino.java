@@ -10,22 +10,23 @@ public class Reino{
     private ArrayList<Unit> unidades = new ArrayList<Unit>();
     private ArrayList<Buildings> edificios;
 
-
-    public Reino(int epoca) {
-        if(epoca == 0){
+    private char epoca;
+    public Reino(char epoca) {
+        this.epoca = epoca;
+        if(epoca == 'I'){
             this.dinero = 800;
             this.recursos = 1000;
             this.manuten = 25;
             this.tamaño = 10;
             //Tierra Magica
-        }else if (epoca == 1){
+        }else if (epoca == 'R'){
             this.dinero = 1200;
             this.recursos = 600;
             this.manuten = 20;
             this.tamaño = 10;
 
             //Edad Contemporanea
-        } else if (epoca == 2){
+        } else if (epoca == 'D'){
             this.dinero = 900;
             this.recursos = 500;
             this.manuten = 10000;
@@ -33,7 +34,11 @@ public class Reino{
             //Futuro
         }
     }
-
+    public String getTipo(){
+        if(epoca == 'I') return "IMPERIO MEDIEVAL";
+        else if(epoca == 'R') return "REPUBLICA CONTEMPORANEA";
+        else return "DICTADURA FUTURISTA";
+    }
     public int getDinero() {
         return dinero;
     }
