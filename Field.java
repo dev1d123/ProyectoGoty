@@ -43,13 +43,14 @@ public class Field extends JFrame{
         JLabel manutencionLabel = new JLabel();
         
         // Configurar la información según el turno
+
         if (turno == 1) {
-            nameLabel.setText("REINO 1");
+            nameLabel.setText("REINO 1: " + r1.getTipo());
             oroLabel.setText("Oro: " + r1.getDinero()+"                                                                   ");
             recursosLabel.setText("Recursos: " + r1.getRecursos()+"               "); 
             manutencionLabel.setText("Manutención: " + r1.getManuten());
         } else if (turno == 2) {
-            nameLabel.setText("REINO 2");
+            nameLabel.setText("REINO 2: " + r2.getTipo());
             oroLabel.setText("Oro: " + r2.getDinero()+"                                                                   ");
             recursosLabel.setText("Recursos: " + r2.getRecursos()+"               ");
             manutencionLabel.setText("Manutención: " + r2.getManuten());
@@ -120,6 +121,7 @@ public class Field extends JFrame{
         }
 
         add(panelGen, BorderLayout.CENTER);
+        System.out.println("Create contens terminado");
     }
     private class ListenerBase implements ActionListener{
         private int opt;
@@ -135,7 +137,6 @@ public class Field extends JFrame{
             }
         }
     }
-    //Usado para retornar la fila y columna luego de seleccionar un soldado
     private int filaSeleccion = -1;
     private int columnaSeleccion = -1;
 
@@ -156,8 +157,9 @@ public class Field extends JFrame{
         }
     }
     public int[] getCoordenadas() {
-        System.out.println("El count vale -> " + latch);
+        System.out.println("Seleccione coordenadas");
         try {
+            System.out.println("wait");
             latch.await(); 
         } catch (InterruptedException e) {
             e.printStackTrace();
