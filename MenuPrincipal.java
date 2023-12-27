@@ -1,12 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.concurrent.CountDownLatch;
 public class MenuPrincipal extends JFrame {
     private JButton nuevaPartida;
     private JButton cargarPartida;
     private JButton estadisticas;
     private JButton crearEjercito;
     private JButton opciones;
+    private static int opt = 0;
+    private static CountDownLatch latch = new CountDownLatch(1);
+    private Juego j = new Juego();
     public MenuPrincipal(){
         setSize(500, 500);
         setTitle("Menu Principal");
@@ -18,9 +22,9 @@ public class MenuPrincipal extends JFrame {
     public void createContents(){
         Font fuente = new Font("Times New Roman", Font.PLAIN, 20);
         nuevaPartida = new JButton("Nueva partida");
-        cargarPartida = new JButton("Cargar partida"); //Las partidas generan un archivo de texto que indica los datos actuales de una partida.
-        estadisticas = new JButton("Ver estadisticas"); //Utiliza las bases de datos creadas para cada soldado, y otro archivo para indicar las victorias de cada ejercito
-        crearEjercito = new JButton("Crear ejercito"); //Utiliza la lectura y apertura de objetos en archivos de textos
+        cargarPartida = new JButton("Cargar partida"); 
+        estadisticas = new JButton("Ver estadisticas"); 
+        crearEjercito = new JButton("Crear ejercito"); 
         opciones = new JButton("Opciones");
         nuevaPartida.setFont(fuente);
         cargarPartida.setFont(fuente);
@@ -50,34 +54,60 @@ public class MenuPrincipal extends JFrame {
         add(developedByLabel, BorderLayout.SOUTH);
         
     }
+
     private class Listener implements ActionListener{
+        //Definir un constructor, con la opcion deseada y hacer un latch
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == nuevaPartida){
                 setVisible(false);
-                //Juego.main(null);
-                //partida();
-                //JOptionPane.showMessageDialog(null, "Nueva partida");
-                System.exit(1);
+                opt = 1;
             }else if(e.getSource() == cargarPartida){
                 setVisible(false);
-                JOptionPane.showMessageDialog(null, "Proximamente...");
-                System.exit(1);
+                opt = 2;
             }else if(e.getSource() == estadisticas){
                 setVisible(false);
-                JOptionPane.showMessageDialog(null, "Proximamente...");
-                System.exit(1);
+                opt = 3;
             }else if(e.getSource() == crearEjercito){
                 setVisible(false);
-                JOptionPane.showMessageDialog(null, "Proximamente...");
-                System.exit(1);
+                opt = 4;
             }else if(e.getSource() == opciones){
                 setVisible(false);
-                JOptionPane.showMessageDialog(null, "Proximamente...");
-                System.exit(1);
+                opt = 5;
             }
+            setVisible(false);
+            latch.countDown();
         }
     }
+
     public static void main(String[] args){
         MenuPrincipal menuPrincipal = new MenuPrincipal();
+        try{
+            latch.await();
+        }catch (Exception e) {
+            System.out.println("error");
+            e.printStackTrace();
+        }
+        switch (opt) {
+            case 1:
+                System.out.println("Opcion1");
+                InicioJuego j = new InicioJuego();
+                break;
+            case 2:
+                System.out.println("Opcion 2");
+                break;
+            case 3:
+                 System.out.println("Opcion 3");
+                 break;
+            case 4:
+                System.out.println("Opcion 4");
+                break;
+            case 5:
+                System.out.println("Opcion 5");
+                break;
+            default:
+                break;
+        }
     }
+
+
 }
