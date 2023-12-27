@@ -1,9 +1,10 @@
+
 import javax.swing.*;
 
 public class Juego {
-    public static void main(String[] args){
+    public static void iniciarJuego(char reino1, char reino2){
         JOptionPane.showMessageDialog(null, "Bienvenido al juego", null, 2);
-        JuegoScript game = new JuegoScript();
+        JuegoScript game = new JuegoScript(reino1, reino2);
         Field battle = new Field(game.getReino1(), game.getReino2());
         int turnos = 0;
         do{
@@ -11,6 +12,8 @@ public class Juego {
             if(turnos%2 == 0){
                 battle.repintar(1);
                 JOptionPane.showMessageDialog(null, "Turno del reino 1");
+
+
                 int arr[] = battle.getCoordenadas();
                 Unit selec = JuegoScript.seleccion(game.getReino1(), arr[0] - 1, arr[1] - 1);
                 while (selec == null) {
@@ -39,8 +42,10 @@ public class Juego {
                 }                
             }
             turnos++;
-        }while(game.victoria());   
+        }while(game.victoria()); 
     }
+
+
 }
 
 
