@@ -1,19 +1,24 @@
-Public Class PraparacionScript{
+public class PreparacionScript{
+    public PreparacionScript{
     public static void main(String [] args){
-        Reino r1 = new Reino(1);
-        Reino r2 = new Reino(1);
+        Reino r1 = new Reino('R');
+        Reino r2 = new Reino('R');
         int evt;
         for(int i = 0; i < 14 ; i++){
             evt = (int)(Math.random()*20);
             if(evt<3){
-                event(r1)
+                event(r1);
             }
+
         }
     }
+
 //Prob. de entrar al metodo, 3/20
     public static void event(Reino re){
+
         int rand = (int)(Math.random()*6);
         Boolean desicion;
+
 //Tiempos de abundancia (B)
         if(rand == 0){
             int food = re.getManuten()*2;
@@ -69,4 +74,6 @@ Public Class PraparacionScript{
                 System.out.println("- Has decidido no abrir la caja. No hay cambios en el reino -");
             }
         }
+    }
+  }
 }
