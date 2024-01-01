@@ -56,17 +56,17 @@ public class InicioJuego extends JFrame {
     private class ListenerBoton implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            imprimirOpcionesSeleccionadas();
+            asignarOpcionesSeleccionadas();
             latch.countDown();
         }
     }
 
-    private void imprimirOpcionesSeleccionadas() {
-        imprimirOpcionesSeleccionadas(panelReino1, 1);
-        imprimirOpcionesSeleccionadas(panelReino2, 2);
+    private void asignarOpcionesSeleccionadas() {
+        asignarOpcionesSeleccionadas(panelReino1, 1);
+        asignarOpcionesSeleccionadas(panelReino2, 2);
     }
 
-    private void imprimirOpcionesSeleccionadas(JPanel panelReino, int r) {
+    private void asignarOpcionesSeleccionadas(JPanel panelReino, int r) {
         ButtonGroup grupoCheckBox = (ButtonGroup) panelReino.getClientProperty("grupoCheckBox");
         Enumeration<AbstractButton> elementos = grupoCheckBox.getElements();
         while (elementos.hasMoreElements()) {

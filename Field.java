@@ -11,8 +11,7 @@ public class Field extends JFrame{
     private static final int ANCHO = 1000; //largo de la ventana
     private static final int MED = 60; //cantidad de filas y columnas del juego
     
-
-    GridLayout lay = new  GridLayout(MED, MED);
+    private GridLayout lay = new  GridLayout(MED, MED);
 
     //Revisar
     private Reino r1;

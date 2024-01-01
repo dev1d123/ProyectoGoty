@@ -1,5 +1,7 @@
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 public class Reino{
     private int dinero;
     private int recursos;
@@ -8,11 +10,12 @@ public class Reino{
     /*Tamaño del largo de uno de los lados del terreno asignado a cada reino, 
     por ahora siendo parcelas cuadradas*/
     private ArrayList<Unit> unidades = new ArrayList<Unit>();
-    private ArrayList<Buildings> edificios;
+    private ArrayList<Buildings> edificios = new ArrayList<Buildings>();
 
     private char epoca;
-    public Reino(char epoca) {
-        this.epoca = epoca;
+
+    public Reino(char e) {
+        this.epoca = e;
         if(epoca == 'I'){
             this.dinero = 800;
             this.recursos = 1000;
@@ -38,6 +41,9 @@ public class Reino{
         if(epoca == 'I') return "IMPERIO MEDIEVAL";
         else if(epoca == 'R') return "REPUBLICA CONTEMPORANEA";
         else return "DICTADURA FUTURISTA";
+    }
+    public char getEpoca(){
+        return epoca;
     }
     public int getDinero() {
         return dinero;
@@ -94,4 +100,32 @@ public class Reino{
     public void destruirEdificio(){
         ;
     }
+    public String[] getData(){
+        //Si queremos incluir sistemas de actualizaciones ver aqui
+        String[] wow = new String[6];
+        if(epoca == 'I'){
+            wow[0] = "Escuela de soldados";
+            wow[1] = "Puerto";
+            wow[2] = "Criadero de Dragones";
+            wow[3] = "Granja";
+            wow[4] = "Herreria";
+            wow[5] = "Torre";
+        }else if (epoca == 'R'){
+            wow[0] = "Cuartel";
+            wow[1] = "Marina";
+            wow[2] = "Fuerza aerea";
+            wow[3] = "SuperMercado";
+            wow[4] = "Manhattan";
+            wow[5] = "Domo de hierro";
+        } else if (epoca == 'D'){
+            wow[0] = "Factory";
+            wow[1] = "UnderSea";
+            wow[2] = "UFactory";
+            wow[3] = "Asimilador";
+            wow[4] = "Arsenal";
+            wow[5] = "Torre centinela";
+        }
+        return wow;
+    }
+
 }
