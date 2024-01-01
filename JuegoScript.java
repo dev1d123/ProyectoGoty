@@ -59,9 +59,7 @@ public class JuegoScript {
         }
         return null;
     }
-    public static void jugada(Unit soldadoR){
-        
-    }
+
     public static void mover(Reino amigo, Reino enemigo, int x, int y, int tox, int toy){
         Unit mov = null;
         for(Unit u: amigo.getUnidades()){

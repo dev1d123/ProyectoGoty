@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.concurrent.CountDownLatch;
+
 public class MenuPrincipal extends JFrame {
     private JButton nuevaPartida;
     private JButton cargarPartida;
