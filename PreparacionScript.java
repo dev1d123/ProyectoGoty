@@ -183,6 +183,13 @@ public class PreparacionScript{
             }
         }
     }
+
+    public static Buildings findBuild(Reino re, int x, int y){
+        for(Buildings edificio: re.getEdificios()){
+            if(edificio.getFila() == edificio.getColumna()) return edificio;
+        }
+        return null;
+    }
 }
 //public class PreparacionScript{
 //    public static void main(String [] args){

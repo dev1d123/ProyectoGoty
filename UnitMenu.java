@@ -12,12 +12,15 @@ public class UnitMenu extends JFrame {
     //3 -> cerrar
     private CountDownLatch latch = new CountDownLatch(1);
     private Field campo;
-
-    public UnitMenu(Field campo, String[] datos, String[] opciones) {
+    private Reino r;
+    private Unit u;
+    public UnitMenu(Field campo, String[] datos, String[] opciones, Unit u, Reino r) {
+        this.r = r;
+        this.u = u;
         this.campo = campo;
         this.datos = datos;
         this.opciones = opciones;
-        int ancho = 200;
+        int ancho = 400;
         int alto = (datos.length + opciones.length - 1) * 50;
         setSize(ancho, alto);
         setLayout(new GridLayout(datos.length + opciones.length, 1, 2, 2));
@@ -65,6 +68,17 @@ public class UnitMenu extends JFrame {
                     }
                 });
             }
+            if(i == 2){
+                button.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(null, "1Has seleccionado una habilidad");
+                        opcionSeleccionada = u.hacerAccion(r, campo); 
+                        dispose();
+                        latch.countDown();
+                    }
+                });
+            }
+            
         }
 
         JButton closeButton = new JButton("Cerrar");

@@ -1,24 +1,36 @@
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 public class Unit{
-    private int vida;
-    private String nombre;
-    private int ataque;
-    private int velocidad;
-    private int pp;
-    private int fila;
-    private int columna;
-    private String habilidad;
+    protected int vida;
+    protected String nombre;
+    protected int ataque;
+    protected int defensa;
+    protected int velocidad;
+    protected int pp;
+    protected int fila;
+    protected int columna;
+    protected int terreno;
+    protected ArrayList<String> habilidades = new ArrayList<String>();
     
-    public Unit(String nombre, int vida, int ataque, int velocidad, int pp, String habilidad, int fila, int columna) {
+    protected int vidaMaxima;
+    public boolean esVisible = true;
+    public Unit(String nombre, int vida, int ataque, int defensa, int velocidad, int pp) {
         this.nombre = nombre;
         this.vida = vida;
         this.ataque = ataque;
+        this.defensa = defensa;
         this.velocidad = velocidad;
         this.pp = pp;
-        this.habilidad = habilidad;
-        this.fila = fila;
-        this.columna = columna;
+        vidaMaxima = vida;
     }
-
+    public void setVisible(boolean b){
+        esVisible = b;
+    }
+    public String getNombre(){
+        return nombre;
+    }
     public int getVida() {
         return vida;
     }
@@ -51,12 +63,8 @@ public class Unit{
         this.pp = pp;
     }
 
-    public String getHabilidad() {
-        return habilidad;
-    }
-
-    public void setHabilidad(String habilidad) {
-        this.habilidad = habilidad;
+    public ArrayList<String> getHabilidad() {
+        return habilidades;
     }
     public int getFila() {
         return fila;
@@ -80,6 +88,7 @@ public class Unit{
 
         return opt;
     }
+
     public String[] getDatos(){
         String[] dat = new String[4];
         dat[0] = "Vida: " + vida;
@@ -88,4 +97,28 @@ public class Unit{
         dat[3] = "Puntos de magia: " + pp;
         return dat;
     }
+    public int getOpcionUnidad(){
+        Object[] optionsArray = habilidades.toArray();
+        int choice = JOptionPane.showOptionDialog(
+            null,
+            "Selecciona una opción:",
+            "Ejemplo de JOptionPane",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            optionsArray,
+            optionsArray[0]
+        );
+        return choice;
+    }
+    public int getTerreno(){
+        return terreno;
+    }
+    public int hacerAccion(Reino re, Field mapa){
+        return -10;
+    }
+    public int getVidaMaxima(){
+        return vidaMaxima;
+    }
+
 }

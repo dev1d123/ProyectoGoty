@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public abstract class Buildings{
     protected int life;
@@ -12,7 +13,7 @@ public abstract class Buildings{
     protected int columna = -1;
     protected String nombre;
     protected ArrayList<String> acciones = new ArrayList<String>();
-
+    protected ArrayList<Integer> codigoAcciones = new ArrayList<Integer>();
     public Buildings(String n, int life, int attack, int defense, int absorption) {
         nombre = n;
         this.life = life;
@@ -66,4 +67,24 @@ public abstract class Buildings{
         this.columna = columna;
     }
     public abstract ImageIcon getIcon();
+
+    public int getOpcionEdificio(){
+        Object[] optionsArray = acciones.toArray();
+        int choice = JOptionPane.showOptionDialog(
+            null,
+            "Selecciona una opción:",
+            "Ejemplo de JOptionPane",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            optionsArray,
+            optionsArray[0]
+        );
+        return choice;
+    }
+    public String getName(){
+        return nombre;
+    }
+
+    public abstract void hacerAccion(Reino re);
 }

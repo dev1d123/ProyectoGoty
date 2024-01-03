@@ -38,6 +38,37 @@ public class PreparacionField extends JFrame {
                 arr[i][j].addActionListener(new ListenerConstruir(i, j));
             }
         }
+        JPanel infoPanel = new JPanel(new BorderLayout());
+        Font font = new Font("Arial", Font.PLAIN, 16);
+        // Etiquetas para mostrar la información
+        JLabel nameLabel = new JLabel();
+        JLabel oroLabel = new JLabel();
+        JLabel recursosLabel = new JLabel();
+        JLabel manutencionLabel = new JLabel();
+        
+        // Configurar la información según el turno
+
+        nameLabel.setText("REINO: " + r.getTipo());
+        oroLabel.setText("Oro: " + r.getDinero()+"                           ");
+        recursosLabel.setText("Recursos: " + r.getRecursos()+"               "); 
+        manutencionLabel.setText("Manutención: " + r.getManuten());
+
+        // Configurar colores de texto
+        oroLabel.setForeground(Color.RED);
+        recursosLabel.setForeground(Color.GRAY);
+        manutencionLabel.setForeground(Color.ORANGE);
+        nameLabel.setFont(font);
+        oroLabel.setFont(font);
+        recursosLabel.setFont(font);
+        manutencionLabel.setFont(font);
+        // Añadir etiquetas al panel
+        infoPanel.add(nameLabel, BorderLayout.NORTH);
+        infoPanel.add(oroLabel, BorderLayout.WEST);
+        infoPanel.add(recursosLabel, BorderLayout.CENTER);
+        infoPanel.add(manutencionLabel, BorderLayout.EAST);
+        
+        // Añadir el panel al contenedor principal (supongo que estás usando un contenedor principal)
+        add(infoPanel, BorderLayout.NORTH);
         add(panelGen);
         for (int i = 6; i <= 9; i++) {
             for (int j = 3; j <= 6; j++) {
@@ -54,32 +85,26 @@ public class PreparacionField extends JFrame {
                 icono = new ImageIcon(imagen);
                 
                 arr[b.getFila()][b.getColumna()].setIcon(icono);
+
             
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "hahaha");
                 e.printStackTrace();
-                System.out.println("idiota");
             }
-            arr[b.getFila()][b.getColumna()].addActionListener(new ListenerEdificio(b.getHabilidades()));
+            arr[b.getFila()][b.getColumna()].addActionListener(new ListenerEdificio(b));
 
         }
     }
+
+    //getHabilidades retorna solo un string...Lo mejor 
     private class ListenerEdificio implements ActionListener {
-        private ArrayList<String> hab;
-        public ListenerEdificio(ArrayList<String> hab){
-            this.hab = hab;
+        private Buildings b;
+        public ListenerEdificio(Buildings b){
+            this.b = b;
         }
         
         public void actionPerformed(ActionEvent e) {
-            //Lo vamos ha hacer con JOptionPane (no nos complicamos la vida)
-            int seleccion = JOptionPane.showOptionDialog(
-                    null,
-                    "Selecciona una opción:",
-                    "Menú de Opciones",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    hab.toArray(), // Convertimos el ArrayList a un array
-                    hab.get(0));   // Valor por defecto
+            b.hacerAccion(r);
             latch.countDown();
         }
     }
@@ -166,26 +191,5 @@ public class PreparacionField extends JFrame {
         repaint();    
     }
 
-    //public static void main(String[] args) {
-    //    PreparacionField c = new PreparacionField(null);
-//
-    //    while (true) {
-    //        latch = new CountDownLatch(1);
-    //        try {
-    //            latch.await();
-    //        } catch (Exception e) {
-    //            System.out.println("error");
-    //            e.printStackTrace();
-    //        }
-    //        int opt = getOpcionSeleccionada();
-    //        System.out.println("La opcion seleccionada field es " + opt);
-    //        if (opt == 1) {
-    //            PreparacionMenu.main(null);
-    //            opcionSeleccionada = 0;
-    //        } else {
-    //            JOptionPane.showMessageDialog(null, "NADA");
-    //        }
-    //        opt = 0;
-    //    }
-    //}
+
 }

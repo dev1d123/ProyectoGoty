@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 import javax.swing.*;
@@ -9,9 +10,15 @@ public class Field extends JFrame{
     private static int turno;
     private static final int ALTO = 800; //ancho de la ventana
     private static final int ANCHO = 1000; //largo de la ventana
-    private static final int MED = 60; //cantidad de filas y columnas del juego
+    private static final int MED = 50; //cantidad de filas y columnas del juego
     
     private GridLayout lay = new  GridLayout(MED, MED);
+
+    private int[][] terreno = new int[MED][MED];
+    //1->AGUA
+    //2->MONTAÑA1 3->MONTAÑA2
+
+    //3->TERRENO1, 4->TERRENO2, 5->TERRENO3
 
     //Revisar
     private Reino r1;
@@ -20,12 +27,62 @@ public class Field extends JFrame{
 
 
     public Field(Reino r1, Reino r2){
-        setTitle("Goty2024"); //Titulo de la ventana
-        setSize(ANCHO, ALTO); //Dimensiones del juego
         this.r1 = r1;
         this.r2 = r2;
+
+        for(int i = 0; i <= 43; i++){
+            for(int j = 0; j <= 3; j++){
+                terreno[i][j] = 1;
+            }
+        }
+        for(int i = 0; i <= 3; i++){
+            for(int j = 0; j <= 43; j++){
+                terreno[i][j] = 1;
+            }
+        }
+        for(int i = 6; i <= 46; i++){
+            for(int j = 46; j <= 49; j++){
+                terreno[i][j] = 1;
+            }
+        }
+        for(int i = 46; i <= 49; i++){
+            for(int j = 6; j <= 49; j++){
+                terreno[i][j] = 1;    
+            }
+        }
+        for(int i = 6, j = 43; i <= 43 || j >=6; i++, j--){
+                Random random = new Random();
+                int var = random.nextInt(2);    
+                if(var == 0 && terreno[i][j] != 1){
+                    terreno[i][j] = 2;
+                }else{
+                    terreno[i][j] = 3;
+                }
+        }
+
+        for(int i = 0; i < MED; i++){
+            for(int j = 0; j < MED; j++){
+                if(terreno[i][j] == 0 || terreno[i][j] == 10){
+                    Random random = new Random();
+                    int var = random.nextInt(3);    
+                    if(var == 0){
+                        terreno[i][j] = 4;
+                    }else if (var == 1){
+                        terreno[i][j] = 5;
+                    }else{
+                        terreno[i][j] = 6;
+                    }
+                }
+            }
+        }
+        
+
+
+        setTitle("Goty2024"); //Titulo de la ventana
+        setSize(ANCHO, ALTO); //Dimensiones del juego
+
         setLayout(new BorderLayout());
-        createContents(1);
+        createContents(turno);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -33,6 +90,7 @@ public class Field extends JFrame{
 
 
     public void createContents(int turno) {
+
         JPanel infoPanel = new JPanel(new BorderLayout());
         Font font = new Font("Arial", Font.PLAIN, 16);
         // Etiquetas para mostrar la información
@@ -73,7 +131,8 @@ public class Field extends JFrame{
         add(infoPanel, BorderLayout.NORTH);
         //add(titulo, BorderLayout.NORTH);
         //Primero imprimimos las dos fortalezas
-        JPanel panelGen = new JPanel(lay);
+        JPanel panelGen = new Fondo(lay, r1.getEpoca(), r2.getEpoca());
+
         JButton[][] arr = new JButton[MED][MED]; 
         for (int i = 0; i < MED; i++) {
             for (int j = 0; j < MED; j++) {
@@ -81,18 +140,67 @@ public class Field extends JFrame{
                 panelGen.add(arr[i][j]);  
             }
         }
-        //Establecer las bases
-        for(int i = MED - 6; i < MED; i++){
-            for (int j = 0; j < 6; j++) {
-                arr[i][j].addActionListener(new ListenerBase(1));
-                
-                arr[i][j].setBackground(Color.RED);
+        //CREAMOS LAS ZONAS DE AGUA
+        //Darle los iconos a los botones de agua
+        for(int i = 0; i <= 43; i++){
+            for(int j = 0; j <= 3; j++){
+                arr[i][j].setIcon(new ImageIcon(getClass().getResource("images/map-water.jpeg")));
             }
         }
+        for(int i = 0; i <= 3; i++){
+            for(int j = 0; j <= 43; j++){
+                arr[i][j].setIcon(new ImageIcon(getClass().getResource("images/map-water.jpeg")));
+            }
+        }
+        for(int i = 6; i <= 46; i++){
+            for(int j = 46; j <= 49; j++){
+                arr[i][j].setIcon(new ImageIcon(getClass().getResource("images/map-water.jpeg")));
+            }
+        }
+        for(int i = 46; i <= 49; i++){
+            for(int j = 6; j <= 49; j++){
+                arr[i][j].setIcon(new ImageIcon(getClass().getResource("images/map-water.jpeg")));
+            }
+        }
+        //CREAMOS LAS ZONAS DE MONTAÑA
+        //Darle los iconos a los botones de montaña
+        for(int i = 6, j = 43; i <= 43 || j >=6; i++, j--){
+                if(terreno[i][j] == 2){
+                    arr[i][j].setIcon(new ImageIcon(getClass().getResource("images/map-montaña1.jpg")));
+                }else if (terreno[i][j] == 3){
+                    arr[i][j].setIcon(new ImageIcon(getClass().getResource("images/map-montaña2.jpg")));
+                }
+        }
+        //Establecer las bases
+
+        for(int i = 0; i < MED; i++){
+            for(int j = 0; j < MED; j++){
+                    if(terreno[i][j] == 4){
+                        arr[i][j].setIcon(new ImageIcon(getClass().getResource("images/map-land1.jpg")));
+                    }else if (terreno[i][j] == 5){
+                        arr[i][j].setIcon(new ImageIcon(getClass().getResource("images/map-land2.png")));
+                    }else if (terreno[i][j] == 6){
+                        arr[i][j].setIcon(new ImageIcon(getClass().getResource("images/map-land3.jpg")));
+                    }
+            }
+        }
+        for(int i = MED - 6; i < MED; i++){
+            for (int j = 0; j < 6; j++) {
+                arr[i][j].setIcon(null);
+                arr[i][j].setOpaque(false);
+                arr[i][j].setContentAreaFilled(false);
+                arr[i][j].setBorderPainted(false);                
+                arr[i][j].addActionListener(new ListenerBase(1));
+            }
+        }
+        
         for(int i = 0; i < 6; i++){
             for (int j = MED - 6; j < MED; j++) {
+                arr[i][j].setIcon(null);
+                arr[i][j].setOpaque(false);
+                arr[i][j].setContentAreaFilled(false);
+                arr[i][j].setBorderPainted(false);                
                 arr[i][j].addActionListener(new ListenerBase(2));
-                arr[i][j].setBackground(Color.BLUE);
             }
         }
 
@@ -104,14 +212,18 @@ public class Field extends JFrame{
                 for (Unit u: r1.getUnidades()) {
                     if (u.getFila() == i && u.getColumna() == j) {
                         System.out.println("El reino 1 tiene una unidad en las coordenadas " + i + " " + j);
+                        arr[i][j].setIcon(null);
                         arr[i][j].setBackground(Color.RED);
+                        arr[i][j].setOpaque(true);                       
                         break;
                     }
                 }
                 for (Unit u: r2.getUnidades()) {
                     if (u.getFila() == i && u.getColumna() == j) {
                         System.out.println("El reino 2 tiene una unidad en las coordenadas " + i + " " + j);
+                        arr[i][j].setIcon(null);
                         arr[i][j].setBackground(Color.BLUE);
+                        arr[i][j].setOpaque(true);                       
                         break;
                     }
                 }
@@ -120,6 +232,7 @@ public class Field extends JFrame{
         }
 
         add(panelGen, BorderLayout.CENTER);
+
         System.out.println("Create contens terminado");
     }
     private class ListenerBase implements ActionListener{
@@ -132,7 +245,6 @@ public class Field extends JFrame{
                 JOptionPane.showMessageDialog(null, "MOSTRAR DATOS DE PREPARACION DEL EJERCITO 1");
             }else if(opt == 2 && turno%2 == 1){
                 JOptionPane.showMessageDialog(null, "MOSTRAR DATOS DE PREPARACION DEL EJERCITO 2");
-
             }
         }
     }
@@ -178,4 +290,14 @@ public class Field extends JFrame{
         revalidate(); 
         repaint();    
     }
+    public Reino getReino1(){
+        return r1;
+    }
+    public Reino getReino2(){
+        return r2;
+    }
+ 
+
+
 }
+

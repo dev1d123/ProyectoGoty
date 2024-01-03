@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 public class Asimilador extends Buildings{
     public Asimilador(){
         super("Asimilador", 510, 0, 0, 0);
@@ -11,6 +12,12 @@ public class Asimilador extends Buildings{
         return acciones;
     }
     public ImageIcon getIcon(){
-        return new ImageIcon("ProyectoGoty\\images\\asimilador.jpeg");
+        return new ImageIcon(getClass().getResource("images/asimilador.jpeg"));
+    }
+    public void hacerAccion(Reino r){
+        int o = this.getOpcionEdificio();
+        if(o == 0){
+            JOptionPane.showMessageDialog(null, "Destruyendo");
+        }
     }
 }

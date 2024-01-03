@@ -10,7 +10,7 @@ public class PreparacionMenu extends JFrame {
     private int indiceEdificio = -1;
     public PreparacionMenu(Reino r) {
         this.r = r;
-        int ancho = 200;
+        int ancho = 600;
         int alto = 400;
         setSize(ancho, alto);
         addWindowListener(new WindowAdapter() {
@@ -20,14 +20,14 @@ public class PreparacionMenu extends JFrame {
                 dispose();
             }
         });
-        setLayout(new GridLayout(2,1));
+        setLayout(new GridLayout(3,1));
         createContents();
 
 
     }
 
     public void createContents() {
-        JButton crearUnidad = new JButton("Crear Unidad");
+        JButton crearUnidad = new JButton("Crear unidad productora");
         crearUnidad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -37,6 +37,18 @@ public class PreparacionMenu extends JFrame {
             }
         });
         add(crearUnidad);
+
+        JButton popUnidad = new JButton("Eliminar un trabajador");
+        popUnidad.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                opcionSeleccionada = 3;
+                latch.countDown();
+                dispose();
+            }
+        });
+
+        add(popUnidad);
 
         JButton crearEdificio = new JButton("Crear Edificio");
         crearEdificio.addActionListener(new ActionListener() {
