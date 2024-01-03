@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 public class Puerto extends Buildings{
     public Puerto(){
         super("Puerto", 1000, 0, 0, 0);
@@ -12,6 +13,16 @@ public class Puerto extends Buildings{
         return acciones;
     }
     public ImageIcon getIcon(){
-        return new ImageIcon("ProyectoGoty\\images\\puerto.jpeg");
+        return new ImageIcon(getClass().getResource("images/puerto.jpeg"));
+    }
+    public void hacerAccion(Reino r){
+        int o = this.getOpcionEdificio();
+        if(o == 0){
+            JOptionPane.showMessageDialog(null, "Creando un barco pirata");
+            Unit crear = new Unit_Pirata();
+            r.getUnidades().add(crear);
+        }else{
+            JOptionPane.showMessageDialog(null, "Destruyendo un edificio");
+        }
     }
 }

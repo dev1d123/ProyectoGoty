@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 public class Rapture extends Buildings{
     public Rapture(){
         super("Rapture", 3500, 0, 0, 0);
@@ -14,6 +15,12 @@ public class Rapture extends Buildings{
         return acciones;
     }
     public ImageIcon getIcon(){
-        return new ImageIcon("ProyectoGoty\\images\\rapture.jpeg");
+        return new ImageIcon(getClass().getResource("images/rapture.jpeg"));
+    }
+    public void hacerAccion(Reino r){
+        int o = this.getOpcionEdificio();
+        if(o == 0){
+            JOptionPane.showMessageDialog(null, "Destruyendo");
+        }
     }
 }

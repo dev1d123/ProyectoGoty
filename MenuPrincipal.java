@@ -11,7 +11,6 @@ public class MenuPrincipal extends JFrame {
     private JButton opciones;
     private static int opt = 0;
     private static CountDownLatch latch = new CountDownLatch(1);
-    private Juego j = new Juego();
     public MenuPrincipal(){
         setSize(500, 500);
         setTitle("Menu Principal");

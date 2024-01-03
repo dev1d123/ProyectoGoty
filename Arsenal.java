@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 public class Arsenal extends Buildings{
     public final int COSTO = 100;
     public Arsenal(){
@@ -15,6 +16,13 @@ public class Arsenal extends Buildings{
         return acciones;
     }
     public ImageIcon getIcon(){
-        return new ImageIcon("ProyectoGoty\\images\\arsenal.jpeg");
+        return new ImageIcon(getClass().getResource("images/arsenal.jpeg"));
+
+    }
+    public void hacerAccion(Reino r){
+        int o = this.getOpcionEdificio();
+        if(o == 0){
+            JOptionPane.showMessageDialog(null, "despues");
+        }
     }
 }

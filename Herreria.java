@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 public class Herreria extends Buildings{
     public Herreria(){
         super("Herreria", 700, 0, 0, 0);
@@ -15,6 +16,12 @@ public class Herreria extends Buildings{
         return acciones;
     }
     public ImageIcon getIcon(){
-        return new ImageIcon("ProyectoGoty\\images\\herreria.jpeg");
+        return new ImageIcon(getClass().getResource("images/herreria.jpeg"));
+    }
+    public void hacerAccion(Reino r){
+        int o = this.getOpcionEdificio();
+        if(o == 0){
+            JOptionPane.showMessageDialog(null, "despues");
+        }
     }
 }

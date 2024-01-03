@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 public class Manhattan extends Buildings{
     public Manhattan(){
         super("Manhattan", 700, 0, 0, 0);
@@ -16,6 +17,12 @@ public class Manhattan extends Buildings{
         return acciones;
     }
     public ImageIcon getIcon(){
-        return new ImageIcon("ProyectoGoty\\images\\manhattan.jpg");
+        return new ImageIcon(getClass().getResource("images/manhattan.jpg"));
+    }
+    public void hacerAccion(Reino r){
+        int o = this.getOpcionEdificio();
+        if(o == 0){
+            JOptionPane.showMessageDialog(null, "despues");
+        }
     }
 }

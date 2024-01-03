@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 public class TorresCentinela extends Buildings{
     public TorresCentinela(){
         super("TorresCentinela", 700, 0, 0, 0);
@@ -12,6 +13,12 @@ public class TorresCentinela extends Buildings{
         return acciones;
     }
     public ImageIcon getIcon(){
-        return new ImageIcon("ProyectoGoty\\images\\centinela.jpeg");
+        return new ImageIcon(getClass().getResource("images/centinela.jpeg"));
+    }
+    public void hacerAccion(Reino r){
+        int o = this.getOpcionEdificio();
+        if(o == 0){
+            JOptionPane.showMessageDialog(null, "Destruyendo");
+        }
     }
 }

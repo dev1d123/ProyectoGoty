@@ -49,8 +49,9 @@ public class InicioJuego extends JFrame {
         dispose();
         System.out.println("Opcion del reino 1: " + opt1);
         System.out.println("Opcion del reino 2: " + opt2);
+        Preparacion.fasePrep(opt1, opt2);
         //EN VEZ DE LLAMAR A JUEGO, SE LLAMA A LA FASE DE PREPARACION
-        Juego.iniciarJuego(opt1, opt2);
+        //Juego.iniciarJuego(opt1, opt2);
     }
 
     private class ListenerBoton implements ActionListener {

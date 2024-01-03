@@ -7,6 +7,7 @@ public class Reino{
     private int recursos;
     private int manuten;
     private int tamaño;
+    private int invasores = 0;
     /*Tamaño del largo de uno de los lados del terreno asignado a cada reino, 
     por ahora siendo parcelas cuadradas*/
     private ArrayList<Unit> unidades = new ArrayList<Unit>();
@@ -126,6 +127,24 @@ public class Reino{
             wow[5] = "Torre centinela";
         }
         return wow;
+    }
+    public String toString(){
+        String infoE = "";
+        for(Buildings b: edificios){
+            infoE += b.getName()+"\n";
+        }
+        String infoU = "";
+        for(Unit u: unidades){
+            infoE += u.getNombre()+"\n";
+        }
+        return "Datos de edificios\n"+
+        infoE + "\nDatos de unidades\n" + infoU +"\n";
+    }
+    public int getInvasores(){
+        return invasores;
+    }   
+    public void setInvasores(int v){
+        invasores = v;
     }
 
 }

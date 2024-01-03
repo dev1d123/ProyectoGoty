@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 public class Castillo extends Buildings{
     public Castillo(){
         super("Castillo", 4000, 0, 0, 0);
@@ -15,5 +16,11 @@ public class Castillo extends Buildings{
     }
     public ImageIcon getIcon(){
         return new ImageIcon("../images/castillo.jpeg");
+    }
+    public void hacerAccion(Reino r){
+        int o = this.getOpcionEdificio();
+        if(o == 0){
+            JOptionPane.showMessageDialog(null, "Destruyendo");
+        }
     }
 }
