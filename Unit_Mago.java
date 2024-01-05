@@ -1,18 +1,18 @@
 import javax.swing.*;
 
 public class Unit_Mago extends Unit_Medieval{
-    public final int COSTO = 100;
-    public final int MATPRIMA = 0;
-    public final int MANUTEN = 2;
 
     public Unit_Mago(){
         super("Mago", 100, 20, 0, 2, 0);
         //luego se le añaden las filas y columnas 
         habilidades.add("Curacion magica");
         habilidades.add("Control Mental");
+        terreno = 1;
+        setPrecios(100, 0, 2);
+
     }
     public ImageIcon getIcon(){
-        return null;
+        return new ImageIcon(getClass().getResource("images_unit/mago.jpg"));
     }
     public int hacerAccion(Reino r, Field campo){
         int o = this.getOpcionUnidad();
@@ -24,4 +24,5 @@ public class Unit_Mago extends Unit_Medieval{
             return 106;
         }
     }
+    
 }

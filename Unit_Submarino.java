@@ -1,19 +1,17 @@
 import javax.swing.*;
 
 public class Unit_Submarino extends Unit_Contemporaneo{
-    public final int COSTO = 500;
-    public final int MATPRIMA = 400;
-    public final int MANUTEN = 15;
 
     public Unit_Submarino(){
         super("Submarino", 300, 50, 3, 1, 0);
         //luego se le añaden las filas y columnas 
         habilidades.add("Torpedo");
         terreno = 2;
+        setPrecios(500, 400, 15);
 
     }
     public ImageIcon getIcon(){
-        return null;
+        return new ImageIcon(getClass().getResource("images_unit/submarino.jpg"));
     }
     public int hacerAccion(Reino r, Field campo){
         int o = this.getOpcionUnidad();
@@ -21,5 +19,8 @@ public class Unit_Submarino extends Unit_Contemporaneo{
             JOptionPane.showMessageDialog(null, "Torpedo");
         }
         return 121;
+    }
+    public void setBalasEspeciales(){
+        balasEspeciales = 10;
     }
 }

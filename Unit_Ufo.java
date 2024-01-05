@@ -1,35 +1,31 @@
 import javax.swing.*;
 
 public class Unit_Ufo extends Unit_Contemporaneo{
-    public final int COSTO = 700;
-    public final int MATPRIMA = 500;
-    public final int MANUTEN = 15;
+
 
     public Unit_Ufo(){
         super("Ufo", 100, 50, 3, 1, 0);
         //luego se le añaden las filas y columnas 
-        habilidades.add("Abducir");
-        habilidades.add("Teletransportar");
         habilidades.add("Cañon de rayos gamma");
         habilidades.add("Campo electromagnetico");
+        terreno = 3;
+        setPrecios(700, 500, 15);
     }
     public ImageIcon getIcon(){
-        return null;
+        return new ImageIcon(getClass().getResource("images_unit/ufo.jpg"));
     }
     public int hacerAccion(Reino r, Field campo){
         int o = this.getOpcionUnidad();
         if(o == 1){
-            JOptionPane.showMessageDialog(null, "Abducir");
-            return 122;
-        }else if(o == 2){
-            JOptionPane.showMessageDialog(null, "Teletransportar");
-            return 123;
-        }else if(o == 3){
             JOptionPane.showMessageDialog(null, "Cañon de rayos gamma");
             return 124;
-        }else{
+        }else if(o == 2){
             JOptionPane.showMessageDialog(null, "Campo Electromagnetico");
-            return 70;
+            
         }
+        return 70;
+    }
+    public void setBalasEspeciales(){
+        balasEspeciales = 10;
     }
 }

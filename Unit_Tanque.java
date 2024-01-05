@@ -9,14 +9,20 @@ public class Unit_Tanque extends Unit_Contemporaneo{
         super("Tanque", 500, 100, 10, 2, 0);
         //luego se le añaden las filas y columnas 
         habilidades.add("Equipo de reparacion");
+        terreno = 1;
+        setPrecios(200, 100, 5);
+
     }
     public ImageIcon getIcon(){
-        return null;
+        return new ImageIcon(getClass().getResource("images_unit/tanque.jpg"));
     }
     public void hacerAccion(Reino r){
         int o = this.getOpcionUnidad();
         if(o == 0){
             JOptionPane.showMessageDialog(null, "Reparandose");
         }
+    }
+    public void setBalasEspeciales(){
+        balasEspeciales = 10;
     }
 }

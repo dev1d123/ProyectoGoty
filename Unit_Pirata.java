@@ -1,9 +1,7 @@
 import javax.swing.*;
 
 public class Unit_Pirata extends Unit_Medieval{
-    public final int COSTO = 150;
-    public final int MATPRIMA = 100;
-    public final int MANUTEN = 5;
+
 
     public Unit_Pirata(){
         super("Pirata", 300, 200, 30, 2, 0);
@@ -11,9 +9,11 @@ public class Unit_Pirata extends Unit_Medieval{
         habilidades.add("Robar");
         habilidades.add("Asediar");
         terreno = 2;
+        setPrecios(150, 100, 5);
+
     }
     public ImageIcon getIcon(){
-        return null;
+        return new ImageIcon(getClass().getResource("images_unit/pirata.jpg"));
     }
     public int hacerAccion(Reino r, Field campo){
         int o = this.getOpcionUnidad();

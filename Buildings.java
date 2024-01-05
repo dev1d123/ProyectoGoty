@@ -5,21 +5,16 @@ import javax.swing.JOptionPane;
 
 public abstract class Buildings{
     protected int life;
-    protected int attack;
-    protected int defense;
-    protected int absorption;
+    protected int costo;
 
     protected int fila = -1;
     protected int columna = -1;
     protected String nombre;
     protected ArrayList<String> acciones = new ArrayList<String>();
     protected ArrayList<Integer> codigoAcciones = new ArrayList<Integer>();
-    public Buildings(String n, int life, int attack, int defense, int absorption) {
+    public Buildings(String n, int costo) {
         nombre = n;
-        this.life = life;
-        this.attack = attack;
-        this.defense = defense;
-        this.absorption = absorption;
+        this.costo = costo;
     }
 
     public int getLife() {
@@ -29,29 +24,11 @@ public abstract class Buildings{
     public void setLife(int life) {
         this.life = life;
     }
-
-    public int getAttack() {
-        return attack;
+    public int getCosto(){
+        return costo;
     }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
-
-    public int getAbsorption() {
-        return absorption;
-    }
-
-    public void setAbsorption(int absorption) {
-        this.absorption = absorption;
+    public String getNombre(){
+        return nombre;
     }
     public abstract ArrayList<String> getHabilidades();
     public int getFila() {

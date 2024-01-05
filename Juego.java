@@ -1,4 +1,8 @@
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 
 import javax.swing.*;
@@ -8,53 +12,83 @@ public class Juego {
     public static void iniciarJuego(Reino r1, Reino r2){
         JOptionPane.showMessageDialog(null, "Bienvenido al juego", null, 2);
         JuegoScript game = new JuegoScript(r1, r2);
-        game.genPosUnitR1();
-        game.genPosUnitR2();
+
+
         Field battle = new Field(game.getReino1(), game.getReino2());
 
         int turnos = 0;
         do{
             
             if(turnos%2 == 0){
+                r1.actualizar();
                 battle.repintar(1);
                 JOptionPane.showMessageDialog(null, "Turno del reino 1");
 
-
                 int arr[] = battle.getCoordenadas();
+                //if para comprobar si se selecciono una base
+                int x = arr[0] - 1;
+                int y = arr[1] - 1; 
+                if((x >= 44 && x <= 49) && (y >= 0 && y <= 5)){
+                    JOptionPane.showMessageDialog(null, "Has seleccionado un reino");
+                    MenuReino m = new MenuReino(r1, r2);
+                    
+                    m.mostrar();
+                    turnos++;
+                    continue;
+                }
                 Unit selec = JuegoScript.seleccion(game.getReino1(), arr[0] - 1, arr[1] - 1);
+
                 while (selec == null) {
                     arr = battle.getCoordenadas();
                     selec = JuegoScript.seleccion(game.getReino1(), arr[0] - 1, arr[1] - 1);
                 }
                 UnitMenu menu = new UnitMenu(battle, selec.getDatos(), selec.getOpciones(), selec, r1);
+
                 int accionUnit = menu.getOpcionSeleccionada();
-                JOptionPane.showMessageDialog(null, "Seleccionaste a opcion " + accionUnit);
                 if(accionUnit == 1){
-                    int dir[] = battle.getCoordenadas();
+                    int dir[] = battle.getCoordenadasObjetivo(arr[0] -1 , arr[1]-1, selec, 1);
                     JuegoScript.mover(game.getReino1(), game.getReino2(), arr[0], arr[1], dir[0], dir[1]);
                 }else if(accionUnit != 70){
                     int dir[] = battle.getCoordenadas();
                     JOptionPane.showMessageDialog(null, "Seleccionaste como objetivo a  " + (dir[0]-1) + ", " + (dir[1]-1));
                     Habilidades.habilidad(accionUnit, selec, dir[0]-1, dir[1]-1, r1, r2, battle);
-                }
+                }else if(accionUnit == 666){
+                    JOptionPane.showMessageDialog(null, "Mostrando un reino1");
+                } 
             }else{
+                r2.actualizar();
                 battle.repintar(2);
                 JOptionPane.showMessageDialog(null, "Turno del reino 2");
+
                 int arr[] = battle.getCoordenadas();
+                int x = arr[0] - 1;
+                int y = arr[1] - 1; 
+                if((x >= 0 && x <= 5) && (y >= 44 && y <= 49)){
+                    JOptionPane.showMessageDialog(null, "Has seleccionado al reino 2");
+                    //Todas las posibles opciones de reino 2
+                    MenuReino m = new MenuReino(r2, r1);
+                    m.mostrar();
+                    turnos++;
+                    continue;
+                }
                 Unit selec = JuegoScript.seleccion(game.getReino2(), arr[0] - 1, arr[1] - 1);
                 while (selec == null) {
                     arr = battle.getCoordenadas();
                     selec = JuegoScript.seleccion(game.getReino2(), arr[0] - 1, arr[1] - 1);
                 }
                 UnitMenu menu = new UnitMenu(battle, selec.getDatos(), selec.getOpciones(), selec, r2);
+
                 int accionUnit = menu.getOpcionSeleccionada();
                 if(accionUnit == 1){
-                    int dir[] = battle.getCoordenadas();
+                    int dir[] = battle.getCoordenadasObjetivo(arr[0] -1 , arr[1]-1, selec, 2);
                     JuegoScript.mover(game.getReino2(), game.getReino1(), arr[0], arr[1], dir[0], dir[1]);
                 }else if(accionUnit != 70){
                     int dir[] = battle.getCoordenadas();
                     JOptionPane.showMessageDialog(null, "Seleccionaste como objetivo a  " + (dir[0]-1) + ", " + (dir[1]-1));
                     Habilidades.habilidad(accionUnit, selec, dir[0] -1 , dir[1] - 1, r2, r1, battle);
+                }else if(accionUnit == 666){
+                    JOptionPane.showMessageDialog(null, "Mostrando un reino2");
+
                 }                
             }
             turnos++;
@@ -113,7 +147,34 @@ public class Juego {
             JOptionPane.showMessageDialog(null, "El reino 1 tiene " + r1.getInvasores() + " invasores");
             JOptionPane.showMessageDialog(null, "El reino 2 tiene " + r2.getInvasores() + " invasores");
         }while(game.victoria()); 
+        if(r1.getInvasores() == 5){
+            genHistorial(r1, r2);
+        }else{
+            genHistorial(r2, r1);
+        }
         System.exit(1);
+    }
+
+    public static void genHistorial(Reino winner, Reino looser){
+        try {
+            // Escribe la información del ganador
+            PrintWriter fileOut = new PrintWriter(new FileWriter("historial.txt", true));
+            fileOut.println("Winner");
+
+            fileOut.println(winner.getDatosFinales() + "\n");
+
+            // Escribe la información del perdedor
+            fileOut.println("Looser\n");
+            fileOut.println(looser.getDatosFinales() + "\n");
+
+            // Separador
+            fileOut.println("0\n");
+            fileOut.close();
+            JOptionPane.showMessageDialog(null, "Historial de la partida generado correctamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al generar el historial de la partida.");
+        }
     }
 }
 

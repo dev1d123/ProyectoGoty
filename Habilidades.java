@@ -12,68 +12,67 @@ public class Habilidades {
     private static int yObj;
     private static Reino amigo;
     private static Reino enemigo;
-    public static void habilidad(int cod, Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo, Field campo){
-        
+    private static Field campo;
+
+    public static void habilidad(int cod, Unit cast, int x, int y, Reino a, Reino e, Field c){
+        caster = cast;
+        xObj = x;
+        yObj = y;
+        amigo = a;
+        enemigo = e;
+        campo = c;
         if(cod == 100){
-            ataqueDesenfrenado(caster, xObj, yObj, amigo, enemigo);
+            ataqueDesenfrenado();
         }else if(cod == 101){
-            asediar(caster, xObj, yObj, amigo, enemigo);
+            asediar();
         }else if(cod == 102){
-            bolaArdiente(caster, xObj, yObj, amigo, enemigo); //dragon
-        }else if(cod == 103){
-            jinete(caster, xObj, yObj, amigo, enemigo); //dragon
+            bolaArdiente(); //dragon
         }else if(cod == 104){
-            cargar(caster, xObj, yObj, amigo, enemigo); //caballero
+            cargar(); //caballero
         }else if(cod == 105){
-            curacionMagica(caster, xObj, yObj, amigo, enemigo); //mago
+            curacionMagica(); //mago
         }else if (cod == 106){
-            controlMental(caster, xObj, yObj, amigo, enemigo); //mago
+            controlMental(); //mago
         }else if (cod == 107){
-            debilitar(caster, xObj, yObj, amigo, enemigo); //alquimista
+            debilitar(); //alquimista
         }else if(cod == 108){
-            fortalecer(caster, xObj, yObj, amigo, enemigo); //alquimista
+            fortalecer(); //alquimista
         }else if(cod == 109){
-            pocionSecreta(caster, xObj, yObj, amigo, enemigo); //alquimista
+            pocionSecreta(); //alquimista
         }else if(cod == 110){
-            bombardear(caster, xObj, yObj, amigo, enemigo); //caza
+            bombardear(); //caza
         }else if(cod == 111){
-            misilNuclear(caster, xObj, yObj, amigo, enemigo); //caza
-        }else if(cod == 112){
-            almacenAviones(caster,  xObj, yObj, amigo, enemigo); //portaaviones
-        }else if(cod == 113){
-            almacenUnidades(caster,  xObj, yObj, amigo, enemigo); //aviones
+            misilNuclear(); //caza
         }else if(cod == 114){
-            bombaDron(caster,  xObj, yObj, amigo, enemigo); //dron
+            bombaDron(); //dron
         }else if(cod == 115){
-            curarArea(caster,  xObj, yObj, amigo, enemigo); //medico
+            curarArea(); //medico
         }else if(cod == 116){
-            gasVeneno(caster,  xObj, yObj, amigo, enemigo); //medico
+            gasVeneno(); //medico
         }else if(cod == 117){
-            hiperVelocidad(caster,  xObj, yObj, amigo, enemigo); //soldier
+            hiperVelocidad(); //soldier
         }else if(cod == 118){
-            rafaga(caster,  xObj, yObj, amigo, enemigo); //airsoldier
+            rafaga(); //airsoldier
         }else if(cod == 119){
-            ataquePEM(caster,  xObj, yObj, amigo, enemigo); //seaSoldier
+            ataquePEM(); //seaSoldier
         }else if(cod == 120){
-            cañonYamato(caster,  xObj, yObj, amigo, enemigo); //cruceroBatalla
+            cañonYamato(); //cruceroBatalla
         }else if(cod == 121){
-            torpedo(caster,  xObj, yObj, amigo, enemigo); //submarino
-        }else if(cod == 122){
-            abducir(caster,  xObj, yObj, amigo, enemigo); //ufo
-        }else if(cod == 123){
-            teletransportar(caster,  xObj, yObj, amigo, enemigo, campo); //ufo
+            torpedo(); //submarino
         }else if(cod == 124){
-            cañonRayosGamma(caster,  xObj, yObj, amigo, enemigo); //ufo
+            cañonRayosGamma(); //ufo
         }else if(cod == 125){
-            aniquilar(caster,  xObj, yObj, amigo, enemigo);
+            aniquilar();
         }
 
     }
-    public static void ataqueDesenfrenado(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void ataqueDesenfrenado(){
         int rango = 1;
         int x = caster.getFila();
         int y = caster.getColumna();
-        double distancia = Math.sqrt(Math.pow(xObj - x, 2) + Math.pow(yObj - y, 2));
+
+        int distancia = Math.max(Math.abs(xObj - x), Math.abs(yObj - y));
+
         if (distancia <= rango) {
             JOptionPane.showMessageDialog(null, "El objetivo está dentro del rango para el ataque desenfrenado.");
             Unit obj = findUnit(xObj, yObj, enemigo);
@@ -87,12 +86,12 @@ public class Habilidades {
         }
 
     }
-    public static void asediar(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void asediar(){
         int rango = 5;
         int x = caster.getFila();
         int y = caster.getColumna();
 
-        double distancia = Math.sqrt(Math.pow(xObj - x, 2) + Math.pow(yObj - y, 2));
+        int distancia = Math.max(Math.abs(xObj - x), Math.abs(yObj - y));
 
         if (distancia <= rango) {
             JOptionPane.showMessageDialog(null, "El objetivo está dentro del rango para el asedio.");
@@ -107,25 +106,21 @@ public class Habilidades {
         }
 
     }
-    public static void bolaArdiente(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo) {
-        int rangoMinimo = 1;
+    public static void bolaArdiente() {
         int rangoZonaImpacto = 1;
         int x = caster.getFila();
         int y = caster.getColumna();
     
         int distancia = Math.max(Math.abs(xObj - x), Math.abs(yObj - y));
-    
-        if (distancia >= rangoMinimo && distancia <= rangoZonaImpacto) {
+        if (distancia > 1) {
             JOptionPane.showMessageDialog(null, "El objetivo está en el rango deseado y al menos a 1 casilla de distancia.");
     
             for (int i = xObj - rangoZonaImpacto; i <= xObj + rangoZonaImpacto; i++) {
                 for (int j = yObj - rangoZonaImpacto; j <= yObj + rangoZonaImpacto; j++) {
-                    if (Math.sqrt(Math.pow(i - xObj, 2) + Math.pow(j - yObj, 2)) <= rangoZonaImpacto) {
+                    if (Math.max(Math.abs(xObj - x), Math.abs(yObj - y)) <= rangoZonaImpacto) {
                         Unit obj = findUnit(i, j, enemigo);
                         if (obj != null) {
                             JOptionPane.showMessageDialog(null, "Asedio a distancia a " + obj.getNombre() + " en la posición (" + i + ", " + j + ")");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "No hay objetivo en la posición (" + i + ", " + j + ")");
                         }
                     }
                 }
@@ -134,27 +129,7 @@ public class Habilidades {
             JOptionPane.showMessageDialog(null, "El objetivo no cumple con los requisitos de rango.");
         }
     }
-    
-    public static void jinete(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo) {
-        int xCaster = caster.getFila();
-        int yCaster = caster.getColumna();
-        int distancia = Math.max(Math.abs(xObj - xCaster), Math.abs(yObj - yCaster));
-        if (distancia == 1) {
-            JOptionPane.showMessageDialog(null, "El caster está a una distancia de una casilla del objetivo.");
-            Unit objetivo = findUnit(xObj, yObj, amigo);
-            if (objetivo != null) {
-                ((Unit_Dragon)caster).setTieneJinete();
-                objetivo.setVisible(false);
-                JOptionPane.showMessageDialog(null, "Se encontró un objetivo en las coordenadas (" + xObj + ", " + yObj + ").");
-            } else {
-                JOptionPane.showMessageDialog(null, "No hay objetivo en las coordenadas (" + xObj + ", " + yObj + ").");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "El caster no cumple con los requisitos de distancia.");
-        }
-    }
-
-    public static void cargar(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo) {
+    public static void cargar() {
         int maxDesplazamiento = 5;
         int xCaster = caster.getFila();
         int yCaster = caster.getColumna();
@@ -174,7 +149,7 @@ public class Habilidades {
         }
     }
 
-    public static void curacionMagica(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo) {
+    public static void curacionMagica() {
         int distanciaHechizo = 3;
         int xCaster = caster.getFila();
         int yCaster = caster.getColumna();
@@ -196,7 +171,7 @@ public class Habilidades {
         }
     }
 
-    public static void controlMental(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo) {
+    public static void controlMental() {
         int rangoControlMental = 2;
         int xCaster = caster.getFila();
         int yCaster = caster.getColumna();
@@ -217,7 +192,7 @@ public class Habilidades {
         }
     }//mago
 
-    public static void debilitar(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void debilitar(){
         int rangoDebilitar = 2;
         int xCaster = caster.getFila();
         int yCaster = caster.getColumna();
@@ -237,7 +212,7 @@ public class Habilidades {
             JOptionPane.showMessageDialog(null, "El objetivo no está dentro del rango de debilitar .");
         }
     } //alquimista
-    public static void fortalecer(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void fortalecer(){
         int rangoFortalecer = 2;
         int xCaster = caster.getFila();
         int yCaster = caster.getColumna();
@@ -257,7 +232,7 @@ public class Habilidades {
             JOptionPane.showMessageDialog(null, "El objetivo no está dentro del rango de fortalecer .");
         }
     } //alquimista
-    public static void pocionSecreta(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo) {
+    public static void pocionSecreta() {
         // Buscar la unidad en las coordenadas (xObj, yObj) en amigo y enemigo
         Unit unidadObjetivoAmigo = findUnit(xObj, yObj, amigo);
         Unit unidadObjetivoEnemigo = findUnit(xObj, yObj, enemigo);
@@ -282,13 +257,7 @@ public class Habilidades {
         }
     } 
     
-
-
-
-
-
-
-    public static void bombardear(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void bombardear(){
         //Lo mismo que bolaMagma
         int rangoMinimo = 1;
         int rangoZonaImpacto = 1;
@@ -320,7 +289,7 @@ public class Habilidades {
 
 
 
-    public static void misilNuclear(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void misilNuclear(){
         //validacion
         int rangoMinimo = 7;
         int rangoZonaImpacto = 1;
@@ -351,42 +320,7 @@ public class Habilidades {
     } //caza
 
 
-
-
-    public static void almacenAviones(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo) {
-        int rango = 1; 
-        int xCaster = caster.getFila();
-        int yCaster = caster.getColumna();
-        int distancia = Math.max(Math.abs(xObj - xCaster), Math.abs(yObj - yCaster));
-        if (distancia <= rango) { //verificar otras cosas
-            Unit unidadAmiga = findUnit(xObj, xObj, amigo);
-            if (unidadAmiga != null) {
-                    JOptionPane.showMessageDialog(null, "El portaaviones almaceno a " + unidadAmiga.getNombre());     
-            }
-            JOptionPane.showMessageDialog(null, "Explosion area realizada en el área de 3 casillas alrededor de las coordenadas (" + xObj + ", " + yObj + ").");     
-        } else {
-            JOptionPane.showMessageDialog(null, "El objetivo no está dentro del rango de hechizo.");
-        }
-
-    }
-    //portaaviones
-
-    public static void almacenUnidades(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
-        int rango = 1; 
-        int xCaster = caster.getFila();
-        int yCaster = caster.getColumna();
-        int distancia = Math.max(Math.abs(xObj - xCaster), Math.abs(yObj - yCaster));
-        if (distancia <= rango) { //verificar otras cosas
-            Unit unidadAmiga = findUnit(xObj, xObj, amigo);
-            if (unidadAmiga != null) {
-                    JOptionPane.showMessageDialog(null, "El avion almaceno a " + unidadAmiga.getNombre());     
-            }
-            JOptionPane.showMessageDialog(null, "Explosion area realizada en el área de 3 casillas alrededor de las coordenadas (" + xObj + ", " + yObj + ").");     
-        } else {
-            JOptionPane.showMessageDialog(null, "El objetivo no está dentro del rango de hechizo.");
-        }
-    } //aviones
-    public static void bombaDron(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void bombaDron(){
         int distanciaHechizo = 3;
         int xCaster = caster.getFila();
         int yCaster = caster.getColumna();
@@ -407,7 +341,7 @@ public class Habilidades {
             JOptionPane.showMessageDialog(null, "El objetivo no está dentro del rango de hechizo.");
         }
     } //dron
-    public static void curarArea(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void curarArea(){
         int distanciaHechizo = 3;
         int xCaster = caster.getFila();
         int yCaster = caster.getColumna();
@@ -428,7 +362,7 @@ public class Habilidades {
             JOptionPane.showMessageDialog(null, "El objetivo no está dentro del rango de hechizo.");
         }
     } //medico
-    public static void gasVeneno(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void gasVeneno(){
         int distanciaHechizo = 3;
         int xCaster = caster.getFila();
         int yCaster = caster.getColumna();
@@ -450,7 +384,7 @@ public class Habilidades {
         }
     } //medico
 
-    public static void hiperVelocidad(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void hiperVelocidad(){
         int maxDesplazamiento = 5;
         int xCaster = caster.getFila();
         int yCaster = caster.getColumna();
@@ -470,7 +404,7 @@ public class Habilidades {
         }
     } //soldier
 
-    public static void rafaga(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void rafaga(){
         int maxDesplazamiento = 5;
         int xCaster = caster.getFila();
         int yCaster = caster.getColumna();
@@ -490,7 +424,7 @@ public class Habilidades {
         }
     } //airsoldier
 
-    public static void ataquePEM(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void ataquePEM(){
         int rango = 3;
         int x = caster.getFila();
         int y = caster.getColumna();
@@ -508,7 +442,7 @@ public class Habilidades {
         }
     } //seaSoldier
 
-    public static void cañonYamato(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void cañonYamato(){
         int rango = 5;
         int x = caster.getFila();
         int y = caster.getColumna();
@@ -525,7 +459,7 @@ public class Habilidades {
             JOptionPane.showMessageDialog(null, "El objetivo está fuera del rango para aniquilar.");
         }
     } //cruceroBatalla
-    public static void torpedo(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void torpedo(){
         int rango = 5;
         int x = caster.getFila();
         int y = caster.getColumna();
@@ -543,43 +477,8 @@ public class Habilidades {
         }
     } //submarino
 
-    public static void abducir(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
 
-    } //ufo
-    public static void teletransportar(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo, Field campo) {
-        // Verificar que la unidad a teleportar sea amiga y esté a una distancia de 4 unidades
-        Unit unidadObjetivo = findUnit(xObj, yObj, amigo);
-
-        if (unidadObjetivo != null && calcularDistanciaManhattan(caster, unidadObjetivo) == 4) {
-            // Obtener nuevas coordenadas del campo
-            int[] nuevasCoordenadas = campo.getCoordenadas();
-
-            // Verificar la distancia máxima permitida
-            if (calcularDistanciaManhattan(caster, nuevasCoordenadas[0], nuevasCoordenadas[1]) <= 10) {
-                // Modificar las coordenadas de la unidad objetivo
-                unidadObjetivo.setFila(nuevasCoordenadas[0]);
-                unidadObjetivo.setColumna(nuevasCoordenadas[1]);
-
-                JOptionPane.showMessageDialog(null, "Teletransporte exitoso a la posición (" + nuevasCoordenadas[0] + ", " + nuevasCoordenadas[1] + ").");
-            } else {
-                JOptionPane.showMessageDialog(null, "La distancia máxima permitida es de 10 casillas.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró una unidad amiga válida para teletransportar.");
-        }
-    }
-
-    // Método para calcular la distancia Manhattan entre dos unidades
-    private static int calcularDistanciaManhattan(Unit unit1, Unit unit2) {
-        return Math.abs(unit1.getFila() - unit2.getFila()) + Math.abs(unit1.getColumna() - unit2.getColumna());
-    }
-
-    // Método para calcular la distancia Manhattan entre una unidad y unas coordenadas
-    private static int calcularDistanciaManhattan(Unit unit, int x, int y) {
-        return Math.abs(unit.getFila() - x) + Math.abs(unit.getColumna() - y);
-    }
-
-    public static void cañonRayosGamma(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo) {
+    public static void cañonRayosGamma() {
         int rango = 5;
 
         // Verificar la posición del objetivo en relación con el caster
@@ -647,7 +546,7 @@ public class Habilidades {
         }
     }//ufo
 
-    public static void aniquilar(Unit caster, int xObj, int yObj, Reino amigo, Reino enemigo){
+    public static void aniquilar(){
         int rango = 15;
         int x = caster.getFila();
         int y = caster.getColumna();
@@ -673,5 +572,18 @@ public class Habilidades {
             }
         }
         return null;
+    }
+    //Dado un rango calcula si la unidad esta dentro del rango
+    public static boolean verificarDistanciaManhattan(int rango){
+        int x = caster.getFila();
+        int y = caster.getColumna();
+
+        int distancia = Math.max(Math.abs(xObj - x), Math.abs(yObj - y));
+        if (distancia <= rango) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }

@@ -1,23 +1,28 @@
 import javax.swing.*;
 
 public class Unit_Avion extends Unit_Contemporaneo{
-    public final int COSTO = 200;
-    public final int MATPRIMA = 100;
-    public final int MANUTEN = 5;
+
 
     public Unit_Avion(){
-        super("Avion", 300, 0, 10, 2, 0);
+        super("Avion", 300, 100, 10, 2, 0);
         //luego se le añaden las filas y columnas 
-        habilidades.add("Almacen de soldados y medicos");
+        terreno = 3;
+        setPrecios(200, 100, 5);
+
     }
     public ImageIcon getIcon(){
-        return null;
+        return new ImageIcon(getClass().getResource("images_unit/avion.jpg"));
     }
     public int hacerAccion(Reino r, Field campo){
         int o = this.getOpcionUnidad();
         if(o == 0){
-            JOptionPane.showMessageDialog(null, "Almacen de soldados y medicos");
+            JOptionPane.showMessageDialog(null, "Ataque especial");
+            setAtaque(getAtaque() + 10);
+            setBalasEspeciales();
         }
-        return 113;
+        return 70;
+    }
+    public void setBalasEspeciales(){
+        balasEspeciales = 10;
     }
 }
