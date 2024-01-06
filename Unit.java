@@ -1,8 +1,10 @@
+import java.awt.Image;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class Unit{
+public abstract class Unit{
     protected int vida;
     protected String nombre;
     protected int ataque;
@@ -13,9 +15,14 @@ public class Unit{
     protected int columna;
     protected int terreno;
     protected ArrayList<String> habilidades = new ArrayList<String>();
-    
+    protected boolean estaVivo = true;
+    protected int ppMaximo;
     protected int vidaMaxima;
-    public boolean esVisible = true;
+
+    protected int costo = 0;
+    protected int recursos = 0;
+    protected int manuten = 0;
+
     public Unit(String nombre, int vida, int ataque, int defensa, int velocidad, int pp) {
         this.nombre = nombre;
         this.vida = vida;
@@ -24,10 +31,23 @@ public class Unit{
         this.velocidad = velocidad;
         this.pp = pp;
         vidaMaxima = vida;
+        ppMaximo = pp;
     }
-    public void setVisible(boolean b){
-        esVisible = b;
+    public void setPrecios(int c, int r, int m){
+        costo = c;
+        recursos = r;
+        manuten = m;
     }
+    public int getManuten(){
+        return manuten;
+    }
+    public int getCosto(){
+        return costo;
+    }
+    public int getRecursos(){
+        return recursos;
+    }
+
     public String getNombre(){
         return nombre;
     }
@@ -120,5 +140,37 @@ public class Unit{
     public int getVidaMaxima(){
         return vidaMaxima;
     }
+    public abstract ImageIcon getIcon();
 
+    public int getDefensa(){
+        return defensa;
+    }
+    public void setDefensa(int d){
+        defensa = d;
+    }
+    public int getPpMax(){
+        return ppMaximo;
+    }
+    public static void crearUnidad(Unit crear, Reino r){
+        if(r.getDinero() >= crear.getCosto() && r.getRecursos() >= crear.getRecursos() && (r.getManutenActual() + crear.getManuten() <= r.getManutenMaxima())){
+            r.getUnidades().add(crear);
+            r.gastarDinero(crear.getCosto());
+            r.gastarRecursos(crear.getRecursos());
+            //La manutencion actual se actualiza sola
+            //Asignando las posiciones de la unidad
+
+            JuegoScript.genUnit(crear, r);
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "Insuficinte oro, recurso o manutencion");
+    }
+    public void recibirDaño(int d){
+        vida = vida - d;
+        if(vida <= 0){
+            estaVivo = false;
+        }
+    }
+    public boolean estaMuerto(){
+        return !estaVivo;
+    }
 }

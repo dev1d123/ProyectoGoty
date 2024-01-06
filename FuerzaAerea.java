@@ -1,13 +1,11 @@
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 public class FuerzaAerea extends Buildings{
     public FuerzaAerea(){
-        super("Fuerza Aerea", 500, 0, 0, 0);
-        acciones.add("Generar caza"); //cod 55
-        acciones.add("Generar aviones"); //cod 55
-        acciones.add("Destruir Edificio"); // cod 0    
+        super("Fuerza Aerea", 600);
+        acciones.add("Generar caza: 300 dinero - 100 recursos - 4 manutencion"); //cod 55
+        acciones.add("Generar aviones: 200 dinero - 100 recursos - 5 manutencion"); //cod 55
     }
 
     public ArrayList<String> getHabilidades(){
@@ -19,15 +17,11 @@ public class FuerzaAerea extends Buildings{
     public void hacerAccion(Reino r){
         int o = this.getOpcionEdificio();
         if(o == 0){
-            JOptionPane.showMessageDialog(null, "Creando un caza");
             Unit crear = new Unit_Caza();
-            r.getUnidades().add(crear);
+            Unit.crearUnidad(crear, r);
         }else if(o == 1){
-            JOptionPane.showMessageDialog(null, "Creando un avion");
             Unit crear = new Unit_Avion();
-            r.getUnidades().add(crear);
-        }else{
-            JOptionPane.showMessageDialog(null, "Destruyendo un edificio");
+            Unit.crearUnidad(crear, r);
         }
     }
 }

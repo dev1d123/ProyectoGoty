@@ -1,12 +1,9 @@
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 public class Criadero extends Buildings{
     public Criadero(){
-        super("Criadero", 500, 0, 0, 0);
-        acciones.add("Producir dragones"); //cod 6
-        acciones.add("Destruir Edificio"); // cod 0    
+        super("Criadero", 500);
+        acciones.add("Producir dragones: 150 dinero - 70 recursos - 5 manutencion");
     }
 
     public ArrayList<String> getHabilidades(){
@@ -18,11 +15,8 @@ public class Criadero extends Buildings{
     public void hacerAccion(Reino r){
         int o = this.getOpcionEdificio();
         if(o == 0){
-            JOptionPane.showMessageDialog(null, "Creando un dragon");
             Unit crear = new Unit_Dragon();
-            r.getUnidades().add(crear);
-        }else{
-            JOptionPane.showMessageDialog(null, "Destruyendo un edificio");
+            Unit.crearUnidad(crear, r);
         }
     }
 }

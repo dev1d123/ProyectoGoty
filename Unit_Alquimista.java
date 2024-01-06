@@ -1,9 +1,6 @@
 import javax.swing.*;
 
 public class Unit_Alquimista extends Unit_Medieval{
-    public final int COSTO = 200;
-    public final int MATPRIMA = 75;
-    public final int MANUTEN = 3;
 
     public Unit_Alquimista(){
         super("Alquimista", 100, 10, 5, 1, 0);
@@ -11,10 +8,13 @@ public class Unit_Alquimista extends Unit_Medieval{
         habilidades.add("Debilitar");
         habilidades.add("Fortalecer");
         habilidades.add("Pocion Secreta");
+        terreno = 1;
+        setPrecios(200, 75, 3);
+
 
     }
     public ImageIcon getIcon(){
-        return null;
+        return new ImageIcon(getClass().getResource("images_unit/alquimista.jpg"));
     }
     public int hacerAccion(Reino r, Field campo){
         int o = this.getOpcionUnidad();

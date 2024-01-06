@@ -4,10 +4,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 public class UnderSea extends Buildings{
     public UnderSea(){
-        super("UnderSea", 750, 0, 0, 0);
-        acciones.add("Generar submarinos"); //cod 26
-        acciones.add("Generar titan"); //cod 26
-        acciones.add("Destruir Edificio"); // cod 0    
+        super("UnderSea", 900);
+        acciones.add("Generar submarinos: 500 dinero - 400 recursos - 15 manutencion"); //cod 26
+        acciones.add("Generar titan: 2500 dinero - 2000 recursos - 40 manutencion"); //cod 26
     }
 
     public ArrayList<String> getHabilidades(){
@@ -19,15 +18,11 @@ public class UnderSea extends Buildings{
     public void hacerAccion(Reino r){
         int o = this.getOpcionEdificio();
         if(o == 0){
-            JOptionPane.showMessageDialog(null, "Creando un submarino");
             Unit crear = new Unit_Submarino();
-            r.getUnidades().add(crear);
+            Unit.crearUnidad(crear, r);
         }else if(o == 1){
-            JOptionPane.showMessageDialog(null, "Creando un titan!!!");
             Unit crear = new Unit_Titan();
-            r.getUnidades().add(crear);
-        }else{
-            JOptionPane.showMessageDialog(null, "Destruyendo un edificio");
+            Unit.crearUnidad(crear, r);
         }
     }
 }

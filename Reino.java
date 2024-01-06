@@ -5,7 +5,8 @@ import javax.swing.JOptionPane;
 public class Reino{
     private int dinero;
     private int recursos;
-    private int manuten;
+    private int manutenMaxima = 0;
+    private int manutenUsada = 0;
     private int tamaño;
     private int invasores = 0;
     /*Tamaño del largo de uno de los lados del terreno asignado a cada reino, 
@@ -14,29 +15,33 @@ public class Reino{
     private ArrayList<Buildings> edificios = new ArrayList<Buildings>();
 
     private char epoca;
-
-    public Reino(char e) {
+    private int aux;
+    public Reino(char e, int num) {
         this.epoca = e;
+        aux = num;
         if(epoca == 'I'){
             this.dinero = 800;
             this.recursos = 1000;
-            this.manuten = 25;
+            this.manutenMaxima = 20;
             this.tamaño = 10;
             //Tierra Magica
         }else if (epoca == 'R'){
             this.dinero = 1200;
             this.recursos = 600;
-            this.manuten = 20;
+            this.manutenMaxima = 20;
             this.tamaño = 10;
 
             //Edad Contemporanea
         } else if (epoca == 'D'){
             this.dinero = 900;
             this.recursos = 500;
-            this.manuten = 10000;
+            this.manutenMaxima = 100;
             this.tamaño = 10;
             //Futuro
         }
+    }
+    public int getAux(){
+        return aux;
     }
     public String getTipo(){
         if(epoca == 'I') return "IMPERIO MEDIEVAL";
@@ -70,12 +75,23 @@ public class Reino{
         this.tamaño = tamaño;
     }
 
-    public int getManuten() {
-        return manuten;
+    public int getManutenMaxima() { 
+        int ans = 20;
+
+        for(Buildings b: edificios){
+            if(b.getNombre().equals("Granja") || b.getNombre().equals("Asimilador") || b.getNombre().equals("Supermercado")){
+                ans+=5;
+            }
+        }
+        return Math.max(100, ans);
     }
 
-    public void setManuten(int manuten) {
-        this.manuten = manuten;
+    public int getManutenActual(){
+        int ans = 0;
+        for(Unit u: this.getUnidades()){
+            ans += u.getManuten();
+        }
+        return ans;
     }
 
     public ArrayList<Unit> getUnidades(){
@@ -94,13 +110,7 @@ public class Reino{
         this.edificios = edificios;
     }
 
-    public void construirEdificio(){
-        ;
-    }
 
-    public void destruirEdificio(){
-        ;
-    }
     public String[] getData(){
         //Si queremos incluir sistemas de actualizaciones ver aqui
         String[] wow = new String[6];
@@ -145,6 +155,47 @@ public class Reino{
     }   
     public void setInvasores(int v){
         invasores = v;
+    }
+    public void gastarDinero(int v){
+        dinero = dinero - v;
+    }
+    public void gastarRecursos(int v){
+        recursos = recursos - v;
+    }
+    public void actualizar(){
+        int oroGanado = 0;
+        int recursosGanados = 0;
+        for(Buildings b: edificios){
+            if(b.getNombre().equals("Obrero") || b.getNombre().equals("Esclavo") || b.getNombre().equals("Robot")){
+                oroGanado+=20;
+                recursosGanados+=20;
+            }
+        }
+        setDinero(getDinero() + oroGanado);
+        setRecursos(getRecursos() + recursosGanados);
+
+    }
+    public String getDatosFinales() {
+        StringBuilder datos = new StringBuilder();
+
+        datos.append("Dinero: ").append(dinero).append("\n");
+        datos.append("Recursos: ").append(recursos).append("\n");
+        datos.append("ManutenMaxima: ").append(manutenMaxima).append("\n");
+        datos.append("ManutenUsada: ").append(manutenUsada).append("\n");
+        datos.append("Tamaño: ").append(tamaño).append("\n");
+        datos.append("Invasores: ").append(invasores).append("\n");
+
+        datos.append("Unidades:\n");
+        for (Unit unidad : unidades) {
+            datos.append(" - ").append(unidad.getNombre()).append("\n");
+        }
+
+        datos.append("Edificios:\n");
+        for (Buildings edificio : edificios) {
+            datos.append(" - ").append(edificio.getNombre()).append("\n");
+        }
+
+        return datos.toString();
     }
 
 }

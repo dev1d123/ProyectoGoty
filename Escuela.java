@@ -4,11 +4,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 public class Escuela extends Buildings{
     public Escuela(){
-        super("Escuela", 600, 0, 0, 0);
-        acciones.add("Producir soldados");
-        acciones.add("Producir magos");
-        acciones.add("Producir alquimistas");
-        acciones.add("Destruir Edificio");   
+        super("Escuela", 450);
+        acciones.add("Producir soldados: 50 dinero - 30 recursos - 2 manutencion");
+        acciones.add("Producir caballeros: 120 dinero - 45 recursos - 3 manutencion");
+        acciones.add("Producir magos: 100 dinero - 0 recursos - 2 manutencion");
+        acciones.add("Producir alquimistas: 200 dinero - 75 recursos - 3 manutencion");
     }
 
     public ArrayList<String> getHabilidades(){
@@ -17,24 +17,24 @@ public class Escuela extends Buildings{
     public ImageIcon getIcon(){
         return new ImageIcon(getClass().getResource("images/escuela.jpeg"));
     }
-
+    //Metodo estatico de Unidad para validar si es posible crear una unidad segun los requisitos
     public void hacerAccion(Reino r){
         int o = this.getOpcionEdificio();
         if(o == 0){
-            JOptionPane.showMessageDialog(null, "Creando un soldado");
             Unit crear = new Unit_Soldado();
-            r.getUnidades().add(crear);
+            Unit.crearUnidad(crear, r);
         }else if(o == 1){
-            JOptionPane.showMessageDialog(null, "Creando un mago");
-            Unit crear = new Unit_Mago();
-            r.getUnidades().add(crear);
+            Unit crear = new Unit_Caballero();
+            Unit.crearUnidad(crear, r);
         }else if(o == 2){
-            JOptionPane.showMessageDialog(null, "Creando un alquimista");
+            Unit crear = new Unit_Mago();
+            Unit.crearUnidad(crear, r);
+        }else if(o == 3){
             Unit crear = new Unit_Alquimista();
-            r.getUnidades().add(crear);
-        }else{
-            JOptionPane.showMessageDialog(null, "Destruyendo un edificio");
+            Unit.crearUnidad(crear, r);
         }
+        
     }
+
 
 }

@@ -2,22 +2,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Unit_Soldado extends Unit_Medieval{
-    public final int COSTO = 50;
-    public final int MATPRIMA = 30;
-    public final int MANUTEN = 2;
 
-    private boolean estaEnDragon;
+
     public Unit_Soldado(){
-        super("Soldado", 200, 50, 15, 1, 0);
+        super("Soldado", 200, 50, 15, 2, 0);
         //luego se le añaden las filas y columnas 
         habilidades.add("Defender");
         habilidades.add("Ataque desenfrenado");
-
+        terreno = 1;
+        setPrecios(50, 30, 2);
     }
     private int defensaOriginal = this.defensa;
     private boolean estaDefendiendo = false;
     public ImageIcon getIcon(){
-        return null;
+        return new ImageIcon(getClass().getResource("images_unit/soldado.jpg"));
     }
     public int hacerAccion(Reino r, Field campo){
         int o = this.getOpcionUnidad();
@@ -43,9 +41,7 @@ public class Unit_Soldado extends Unit_Medieval{
             return 100;
         }
     }
-    public void setTieneJinete(){
-        estaEnDragon = true;
-    }
+
 
 
 }

@@ -1,6 +1,10 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
@@ -13,7 +17,10 @@ public class PreparacionField extends JFrame {
     private boolean estaSeleccionando = false;
     private JButton[][] arr = new JButton[10][10];
 
-    public PreparacionField(Reino r) {
+    private boolean esDia;
+
+    public PreparacionField(Reino r, boolean esDia) {
+        this.esDia = esDia;
         this.r = r;
         setTitle(r.getTipo());
         setSize(600, 600);
@@ -29,13 +36,21 @@ public class PreparacionField extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    public void setDia(boolean v){
+        esDia = v;
+    }
+
+
     public void createContents() {
-        JPanel panelGen = new JPanel(new GridLayout(10, 10));
+
+        JPanel panelGen = new FondoPreparacion(new GridLayout(10, 10), esDia);
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 arr[i][j] = new JButton("");
-                panelGen.add(arr[i][j]);
+                arr[i][j].setOpaque(false);
+                arr[i][j].setContentAreaFilled(false); // Establecer el área de contenido transparente
                 arr[i][j].addActionListener(new ListenerConstruir(i, j));
+                panelGen.add(arr[i][j]);
             }
         }
         JPanel infoPanel = new JPanel(new BorderLayout());
@@ -48,10 +63,10 @@ public class PreparacionField extends JFrame {
         
         // Configurar la información según el turno
 
-        nameLabel.setText("REINO: " + r.getTipo());
+        nameLabel.setText("REINO " + r.getAux() + ": " + r.getTipo());
         oroLabel.setText("Oro: " + r.getDinero()+"                           ");
         recursosLabel.setText("Recursos: " + r.getRecursos()+"               "); 
-        manutencionLabel.setText("Manutención: " + r.getManuten());
+        manutencionLabel.setText("Manutención: " + r.getManutenActual() + " / " + r.getManutenMaxima());
 
         // Configurar colores de texto
         oroLabel.setForeground(Color.RED);
@@ -73,7 +88,9 @@ public class PreparacionField extends JFrame {
         for (int i = 6; i <= 9; i++) {
             for (int j = 3; j <= 6; j++) {
                 arr[i][j].setBackground(Color.RED);
+                arr[i][j].setOpaque(true);
                 arr[i][j].addActionListener(new ListenerBase());
+
             }
         }
         
@@ -105,6 +122,7 @@ public class PreparacionField extends JFrame {
         
         public void actionPerformed(ActionEvent e) {
             b.hacerAccion(r);
+            repintar();
             latch.countDown();
         }
     }
@@ -114,6 +132,7 @@ public class PreparacionField extends JFrame {
     private class ListenerBase implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             opcionSeleccionada = 1;
+            repintar();
             latch.countDown();
         }
     }
@@ -178,7 +197,6 @@ public class PreparacionField extends JFrame {
         
     }
     public void construir(int x, int y, Buildings edificioConstruido){
-        System.out.println("Seleccionaste el indice " + x + ", " + y);
         edificioConstruido.setFila(x-1);
         edificioConstruido.setColumna(y-1);
         r.getEdificios().add(edificioConstruido);
@@ -190,6 +208,4 @@ public class PreparacionField extends JFrame {
         revalidate(); 
         repaint();    
     }
-
-
 }

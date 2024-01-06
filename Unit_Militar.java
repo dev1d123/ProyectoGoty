@@ -10,10 +10,12 @@ public class Unit_Militar extends Unit_Contemporaneo{
         //luego se le añaden las filas y columnas 
         habilidades.add("Estrategia ofensiva");
         habilidades.add("Estrategia defensiva");
+        terreno = 1;
+        setPrecios(60, 30, 2);
 
     }
     public ImageIcon getIcon(){
-        return null;
+        return new ImageIcon(getClass().getResource("images_unit/militar.jpg"));
     }
     public void hacerAccion(Reino r){
         int o = this.getOpcionUnidad();
@@ -22,5 +24,8 @@ public class Unit_Militar extends Unit_Contemporaneo{
         }else if(o == 1){
             JOptionPane.showMessageDialog(null, "Estrategia defensiva");
         }
+    }
+    public void setBalasEspeciales(){
+        balasEspeciales = 10;
     }
 }

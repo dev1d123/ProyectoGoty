@@ -4,10 +4,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 public class Supermercado extends Buildings{
     public Supermercado(){
-        super("Supermercado", 500, 0, 0, 0);
+        super("Supermercado", 500);
         acciones.add("Generar Manutencion"); //cod 17
         acciones.add("Generar Materia Prima"); //cod 18
-        acciones.add("Destruir Edificio"); // cod 0    
     }
 
     public ArrayList<String> getHabilidades(){
@@ -20,12 +19,10 @@ public class Supermercado extends Buildings{
         int o = this.getOpcionEdificio();
         if(o == 0){
             JOptionPane.showMessageDialog(null, "Generar manutencion");
-
+            //r.setManutencion(r.getManutencion() + 10);
         }else if(o == 1){
             JOptionPane.showMessageDialog(null, "Generar materia prima");
-
-        }else{
-            JOptionPane.showMessageDialog(null, "Destruyendo");
+            //r.setMateriaPrima(r.getMateriaPrima() + 10);
 
         }
     }
