@@ -21,6 +21,7 @@ public class Unit_Drones extends Unit_Contemporaneo{
         int o = this.getOpcionUnidad();
         if(o == 0){
             JOptionPane.showMessageDialog(null, "Explotando");
+            this.recibirDaño(9999);
         }
         return 114;
     }

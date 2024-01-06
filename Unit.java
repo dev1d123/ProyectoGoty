@@ -1,10 +1,11 @@
 import java.awt.Image;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public abstract class Unit{
+public abstract class Unit implements Serializable{
     protected int vida;
     protected String nombre;
     protected int ataque;
@@ -156,8 +157,6 @@ public abstract class Unit{
             r.getUnidades().add(crear);
             r.gastarDinero(crear.getCosto());
             r.gastarRecursos(crear.getRecursos());
-            //La manutencion actual se actualiza sola
-            //Asignando las posiciones de la unidad
 
             JuegoScript.genUnit(crear, r);
             return;

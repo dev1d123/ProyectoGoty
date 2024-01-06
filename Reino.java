@@ -1,14 +1,16 @@
+import java.io.Serializable;
 import java.util.*;
 
-import javax.swing.JOptionPane;
 
-public class Reino{
+public class Reino implements Serializable{
     private int dinero;
     private int recursos;
     private int manutenMaxima = 0;
     private int manutenUsada = 0;
     private int tamaño;
     private int invasores = 0;
+    private int ctdTrabajadores = 0;
+    private int ctdManuten = 0;
     /*Tamaño del largo de uno de los lados del terreno asignado a cada reino, 
     por ahora siendo parcelas cuadradas*/
     private ArrayList<Unit> unidades = new ArrayList<Unit>();
@@ -16,6 +18,7 @@ public class Reino{
 
     private char epoca;
     private int aux;
+
     public Reino(char e, int num) {
         this.epoca = e;
         aux = num;
@@ -75,15 +78,18 @@ public class Reino{
         this.tamaño = tamaño;
     }
 
-    public int getManutenMaxima() { 
-        int ans = 20;
+    public void setTrabajadores(int v){
+        ctdTrabajadores = v;
+    }
+    public int getTrabajadores(){
+        return ctdTrabajadores;
+    }
 
-        for(Buildings b: edificios){
-            if(b.getNombre().equals("Granja") || b.getNombre().equals("Asimilador") || b.getNombre().equals("Supermercado")){
-                ans+=5;
-            }
-        }
-        return Math.max(100, ans);
+    public int getManutenMaxima(){
+        return Math.min(100, 20 + 5*ctdManuten);
+    }
+    public void actualizarCtdManuten(){
+        ctdManuten++;
     }
 
     public int getManutenActual(){
@@ -112,7 +118,7 @@ public class Reino{
 
 
     public String[] getData(){
-        //Si queremos incluir sistemas de actualizaciones ver aqui
+        //Si queremos incluir sistemas de actualizaciones ver aqi
         String[] wow = new String[6];
         if(epoca == 'I'){
             wow[0] = "Escuela de soldados";
@@ -163,39 +169,10 @@ public class Reino{
         recursos = recursos - v;
     }
     public void actualizar(){
-        int oroGanado = 0;
-        int recursosGanados = 0;
-        for(Buildings b: edificios){
-            if(b.getNombre().equals("Obrero") || b.getNombre().equals("Esclavo") || b.getNombre().equals("Robot")){
-                oroGanado+=20;
-                recursosGanados+=20;
-            }
-        }
+        int oroGanado = 20*ctdTrabajadores;
+        int recursosGanados = 20*ctdTrabajadores;
         setDinero(getDinero() + oroGanado);
         setRecursos(getRecursos() + recursosGanados);
 
     }
-    public String getDatosFinales() {
-        StringBuilder datos = new StringBuilder();
-
-        datos.append("Dinero: ").append(dinero).append("\n");
-        datos.append("Recursos: ").append(recursos).append("\n");
-        datos.append("ManutenMaxima: ").append(manutenMaxima).append("\n");
-        datos.append("ManutenUsada: ").append(manutenUsada).append("\n");
-        datos.append("Tamaño: ").append(tamaño).append("\n");
-        datos.append("Invasores: ").append(invasores).append("\n");
-
-        datos.append("Unidades:\n");
-        for (Unit unidad : unidades) {
-            datos.append(" - ").append(unidad.getNombre()).append("\n");
-        }
-
-        datos.append("Edificios:\n");
-        for (Buildings edificio : edificios) {
-            datos.append(" - ").append(edificio.getNombre()).append("\n");
-        }
-
-        return datos.toString();
-    }
-
 }

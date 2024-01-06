@@ -193,10 +193,7 @@ public class Field extends JFrame{
                 arr[i][j].setIcon(null);
                 arr[i][j].setOpaque(false);
                 arr[i][j].setContentAreaFilled(false);
-                arr[i][j].setBorderPainted(false);
-                if(turno%2 == 1){
-                    arr[i][j].addActionListener(new ListenerBase(1));
-                }                
+                arr[i][j].setBorderPainted(false);                
             }
         }   
         //REINO2
@@ -206,9 +203,7 @@ public class Field extends JFrame{
                 arr[i][j].setOpaque(false);
                 arr[i][j].setContentAreaFilled(false);
                 arr[i][j].setBorderPainted(false);                
-                if(turno%2 == 0){
-                    arr[i][j].addActionListener(new ListenerBase(2));
-                }                 
+                                 
             }
         }
 
@@ -245,25 +240,6 @@ public class Field extends JFrame{
         add(panelGen, BorderLayout.CENTER);
 
         System.out.println("Create contens terminado");
-    }
-    //MENU DE REINOS EN JUEGO!!!!
-    
-    private class ListenerBase implements ActionListener{
-        private int opt;
-        public ListenerBase(int i){
-            opt = i;
-        }
-        public void actionPerformed(ActionEvent e) {
-            if(opt == 1){
-                JOptionPane.showMessageDialog(null, "MOSTRAR DATOS DE PREPARACION DEL EJERCITO 1");
-            }else if(opt == 2 && turno%2 == 1){
-                JOptionPane.showMessageDialog(null, "MOSTRAR DATOS DE PREPARACION DEL EJERCITO 2");
-            }
-            esMenu = true;
-        }
-    }
-    public boolean esMenu(){
-        return esMenu;
     }
 
     private int filaSeleccion = -1;
@@ -322,7 +298,6 @@ public class Field extends JFrame{
 
         if(turno%2== 0){
             //Verifica en r2
-            JOptionPane.showMessageDialog(null, "Es turno de r1");
             for(Unit u: r1.getUnidades()){
                 if(u.getFila() == arr[0]-1 && u.getColumna() == arr[1] - 1){
                     movValidos[arr[0]-1][arr[1]-1] = true;
@@ -330,7 +305,6 @@ public class Field extends JFrame{
             }
         }else{
             //Verifica en r1
-            JOptionPane.showMessageDialog(null, "Es turno de r2");
             for(Unit u: r2.getUnidades()){
                 if(u.getFila() == arr[0]-1 && u.getColumna() == arr[1] - 1){
                     movValidos[arr[0]-1][arr[1]-1] = true;

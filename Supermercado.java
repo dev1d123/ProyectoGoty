@@ -19,11 +19,12 @@ public class Supermercado extends Buildings{
         int o = this.getOpcionEdificio();
         if(o == 0){
             JOptionPane.showMessageDialog(null, "Generar manutencion");
-            //r.setManutencion(r.getManutencion() + 10);
+            r.actualizarCtdManuten();
         }else if(o == 1){
             JOptionPane.showMessageDialog(null, "Generar materia prima");
-            //r.setMateriaPrima(r.getMateriaPrima() + 10);
-
+            r.setRecursos(r.getRecursos() + 300);
         }
+        r.getEdificios().remove(this);
+
     }
 }

@@ -7,7 +7,7 @@ public class MenuPrincipal extends JFrame {
     private JButton nuevaPartida;
     private JButton comoJugar;
     private JButton verHistoria;
-    private JButton estadisticas;
+    private JButton cargar;
     private static int opt = 0;
     private static boolean showMenu = true;
     private static CountDownLatch latch = new CountDownLatch(1);
@@ -35,22 +35,22 @@ public class MenuPrincipal extends JFrame {
         nuevaPartida = createStyledButton("Nueva partida", fuente);
         comoJugar = createStyledButton("Como jugar", fuente);
         verHistoria = createStyledButton("Ver historia", fuente);
-        estadisticas = createStyledButton("Ver estadisticas", fuente);
+        cargar = createStyledButton("Cargar Partida", fuente);
 
         JPanel panel = new MenuPrincipalFondo();
         panel.setLayout(new GridLayout(5, 1, 2, 2));
 
-        panel.add(createStyledLabel("                                 Time Madness", 30));
+        panel.add(createStyledLabel("                              TIME MADNESS", 30));
         panel.add(nuevaPartida);
         panel.add(comoJugar);
-        panel.add(estadisticas);
+        panel.add(cargar);
         panel.add(verHistoria);
 
         // Asignando listeners
         nuevaPartida.addActionListener(new Listener());
         comoJugar.addActionListener(new Listener());
         verHistoria.addActionListener(new Listener());
-        estadisticas.addActionListener(new Listener());
+        cargar.addActionListener(new Listener());
 
         add(panel, BorderLayout.CENTER);
     }
@@ -73,11 +73,16 @@ public class MenuPrincipal extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == nuevaPartida) {
                 opt = 1;
+
             } else if (e.getSource() == comoJugar) {
                 opt = 2;
+                MenuGenerico m = new MenuGenerico("¿Como Jugar?", MenuPrincipal.imgComoJugar, false);
+
             } else if (e.getSource() == verHistoria) {
                 opt = 3;
-            } else if (e.getSource() == estadisticas) {
+                MenuGenerico n = new MenuGenerico("Historia", MenuPrincipal.imgHistoria, false);
+
+            } else if (e.getSource() == cargar) {
                 opt = 4;
             }
             setVisible(false);
@@ -93,20 +98,11 @@ public class MenuPrincipal extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        switch (opt) {
-            case 1:
-                InicioJuego j = new InicioJuego();
-                break;
-                case 2:
-                MenuGenerico m = new MenuGenerico("¿Como Jugar?", MenuPrincipal.imgComoJugar, false);
-                break;
-            case 3:
-                MenuGenerico n = new MenuGenerico("Historia", MenuPrincipal.imgHistoria, false);
-                break;
-            case 4:
-                GenerarHistorial g = new GenerarHistorial();
-                break;
+        if(opt == 1){
+            InicioJuego j = new InicioJuego();  
+        }
+        if(opt == 4) {
+            CargarPartida.main(null);
         }
     }
 }

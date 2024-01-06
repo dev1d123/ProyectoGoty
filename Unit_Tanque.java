@@ -6,9 +6,8 @@ public class Unit_Tanque extends Unit_Contemporaneo{
     public final int MANUTEN = 5;
 
     public Unit_Tanque(){
-        super("Tanque", 500, 100, 10, 2, 0);
-        //luego se le añaden las filas y columnas 
-        habilidades.add("Equipo de reparacion");
+        super("Tanque", 500, 100, 10, 2, 1);
+        habilidades.add("Equipo de reparacion: El tanque recupera toda su vida (1PP)");
         terreno = 1;
         setPrecios(200, 100, 5);
 
@@ -19,7 +18,13 @@ public class Unit_Tanque extends Unit_Contemporaneo{
     public void hacerAccion(Reino r){
         int o = this.getOpcionUnidad();
         if(o == 0){
-            JOptionPane.showMessageDialog(null, "Reparandose");
+            if(pp>=1){
+                JOptionPane.showMessageDialog(null, "Reparandose");
+                pp--;
+            }else{
+                JOptionPane.showMessageDialog(null, "Insuficientes puntos de poder");
+            }
+            
         }
     }
     public void setBalasEspeciales(){

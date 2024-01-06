@@ -7,6 +7,8 @@ public class Unit_Avion extends Unit_Contemporaneo{
         super("Avion", 300, 100, 10, 2, 0);
         //luego se le añaden las filas y columnas 
         terreno = 3;
+        habilidades.add("Ataque especial");
+
         setPrecios(200, 100, 5);
 
     }

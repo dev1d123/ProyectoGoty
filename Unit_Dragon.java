@@ -8,7 +8,7 @@ public class Unit_Dragon extends Unit_Medieval{
     public Unit_Dragon(){
         super("Dragon", 300, 150, 7, 2, 0);
         //luego se le añaden las filas y columnas 
-        habilidades.add("Bola ardiente");
+        habilidades.add("Bola ardiente: Lanza una bola a mas de una casilla de distancia");
         terreno = 3;
         setPrecios(150, 70, 5);
 
@@ -23,7 +23,6 @@ public class Unit_Dragon extends Unit_Medieval{
             JOptionPane.showMessageDialog(null, "Bola ardiente");
         }
         return 102;
-
     }
 
 }

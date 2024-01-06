@@ -5,9 +5,9 @@ public class Unit_Alquimista extends Unit_Medieval{
     public Unit_Alquimista(){
         super("Alquimista", 100, 10, 5, 1, 0);
         //luego se le añaden las filas y columnas 
-        habilidades.add("Debilitar");
-        habilidades.add("Fortalecer");
-        habilidades.add("Pocion Secreta");
+        habilidades.add("Debilitar: Reduce los atributos de un enemigo");
+        habilidades.add("Fortalecer: Aumenta los atributos de los amigos");
+        habilidades.add("Pocion Secreta: Prob 50% de matar a la unidad o fortalecerla");
         terreno = 1;
         setPrecios(200, 75, 3);
 

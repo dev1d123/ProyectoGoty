@@ -4,9 +4,9 @@ public class Unit_Soldier extends Unit_Contemporaneo{
 
 
     public Unit_Soldier(){
-        super("Soldier", 150, 50, 3, 1, 0);
+        super("Soldier", 150, 50, 3, 1, 25);
         //luego se le añaden las filas y columnas 
-        habilidades.add("HiperVelocidad");
+        habilidades.add("HiperVelocidad : Otorga la capacidad de desplazarse 5 casillas (5 PP)");
         terreno = 1;
         setPrecios(120, 50, 5);
     }
@@ -16,9 +16,13 @@ public class Unit_Soldier extends Unit_Contemporaneo{
     public int hacerAccion(Reino r, Field campo){
         int o = this.getOpcionUnidad();
         if(o == 1){
-            JOptionPane.showMessageDialog(null, "HiperVelocidad");
+            if(o >= 5){
+                JOptionPane.showMessageDialog(null, "HiperVelocidad");
+                pp-=5;
+                return 117;
+            }
         }
-        return 117;
+        return 70;
     }
     public void setBalasEspeciales(){
         balasEspeciales = 10;

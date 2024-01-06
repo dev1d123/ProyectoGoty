@@ -12,8 +12,8 @@ public class Unit_Portaaviones extends Unit_Contemporaneo{
     public ImageIcon getIcon(){
         return new ImageIcon(getClass().getResource("images_unit/portaaviones.jpg"));
     }
-    public void hacerAccion(Reino r){
-
+    public int hacerAccion(Reino r, Field campo){
+        return 70;
     }
     public void setBalasEspeciales(){
         balasEspeciales = 10;

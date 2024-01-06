@@ -6,8 +6,8 @@ public class Unit_Caza extends Unit_Contemporaneo{
     public final int MANUTEN = 4;
 
     public Unit_Caza(){
-        super("Unit_Caza", 500, 200, 10, 3, 0);
-        //luego se le añaden las filas y columnas 
+        super("Unit_Caza", 500, 200, 10, 3, 10);
+ 
         habilidades.add("Bombardear");
         terreno = 3;
         setPrecios(300, 100, 4);
@@ -21,7 +21,7 @@ public class Unit_Caza extends Unit_Contemporaneo{
         return new ImageIcon(getClass().getResource("images_unit/caza.jpg"));
     }
     public int hacerAccion(Reino r, Field campo){
-        //pasivas
+     
         if(tieneMisil){
             habilidades.add("Misil Nuclear");
         }

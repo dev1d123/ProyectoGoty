@@ -7,9 +7,9 @@ public class Unit_Medico extends Unit_Contemporaneo{
 
     public boolean medAvanzado = false;
     public Unit_Medico(){
-        super("Medico", 50, 0, 0, 1, 0);
+        super("Medico", 50, 0, 0, 1, 120);
         //luego se le añaden las filas y columnas 
-        habilidades.add("Curacion");
+        habilidades.add("Curacion: Cura 100 puntos de vida a las unidades (30 PP)");
         terreno = 1;
         setPrecios(60, 60, 2);
 
@@ -22,17 +22,28 @@ public class Unit_Medico extends Unit_Contemporaneo{
     }
     public int hacerAccion(Reino r, Field campo){
         if(medAvanzado){
-            habilidades.add("Gas venenoso");
+            habilidades.add("Gas venenoso: Daña 200 puntos de vida a las unidades (30 PP)");
         }
 
         int o = this.getOpcionUnidad();
         if(o == 1){
-            JOptionPane.showMessageDialog(null, "Curacion");
-            return 115;
+            if(pp>=30){
+                JOptionPane.showMessageDialog(null, "Curacion");
+                pp-=30;
+                return 115;
+            }else{
+                JOptionPane.showMessageDialog(null, "Insuficientes puntos de habilidad");
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "Gas venenoso");
-            return 116;
+            if(pp>=30){
+                JOptionPane.showMessageDialog(null, "Gas Venenoso");
+                pp-=30;
+                return 116;
+            }else{
+                JOptionPane.showMessageDialog(null, "Insuficientes puntos de habilidad");
+            }
         }
+        return 70;
     }
     public void setBalasEspeciales(){
         balasEspeciales = 10;

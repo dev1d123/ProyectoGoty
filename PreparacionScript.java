@@ -30,25 +30,7 @@ public class PreparacionScript{
         return r2;
     }
 
-    //Codigo para poner un edificio (validar)
-    public boolean esvalidoR1(int x, int y){
-        //Verificar que no ponga el edificio en la base
-        if(posR1[x][y]){
-            return false;
-        }else{
-            posR1[x][y] = true;
-            return true;
-        }
-    }
-    public boolean esvalidoR2(int x, int y){
-        //Verificar que no ponga el edificio en la base
-        if(posR2[x][y]){
-            return false;
-        }else{
-            posR1[x][y] = true;
-            return true;
-        }
-    }
+
     //metodo estatico para ver el indice del edificio y crear el edificio!!!
     public static Buildings obtenerEdificio (Reino re, int index){
         Buildings contenedor = null;
@@ -118,10 +100,5 @@ public class PreparacionScript{
         }   
         return contenedor;
     }
-    public static Buildings findBuild(Reino re, int x, int y){
-        for(Buildings edificio: re.getEdificios()){
-            if(edificio.getFila() == edificio.getColumna()) return edificio;
-        }
-        return null;
-    }
+
 }

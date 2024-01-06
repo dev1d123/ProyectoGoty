@@ -7,8 +7,8 @@ public class Unit_Soldado extends Unit_Medieval{
     public Unit_Soldado(){
         super("Soldado", 200, 50, 15, 2, 0);
         //luego se le añaden las filas y columnas 
-        habilidades.add("Defender");
-        habilidades.add("Ataque desenfrenado");
+        habilidades.add("Defender (0 PP)");
+        habilidades.add("Ataque desenfrenado (0 PP)");
         terreno = 1;
         setPrecios(50, 30, 2);
     }
@@ -26,7 +26,6 @@ public class Unit_Soldado extends Unit_Medieval{
                 JOptionPane.showMessageDialog(null, "Dejar de defender");
                 habilidades.set(0, "Defender");
                 defensa = defensaOriginal;
-
             }else{
                 //Activar habilidad
                 estaDefendiendo=true;

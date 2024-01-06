@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public abstract class Buildings{
+public abstract class Buildings implements Serializable{
     protected int life;
     protected int costo;
 
